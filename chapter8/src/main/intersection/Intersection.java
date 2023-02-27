@@ -1,7 +1,7 @@
 package intersection;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class Intersection {
 
@@ -14,21 +14,16 @@ public class Intersection {
             return new int[]{};
         }
 
-        var hashMap = new HashMap<>();
-
-        var result = new ArrayList<Integer>();
+        var hashMap = new HashMap<Integer, Boolean>();
 
         for (int elementInArr1 : arr1) {
             hashMap.put(elementInArr1, false);
         }
         for (int elementInArr2 : arr2) {
-            if (hashMap.get(elementInArr2) != null) {
-                result.add(elementInArr2);
-            }
-
+            hashMap.computeIfPresent(elementInArr2, (o, o2) -> true);
         }
 
-        return result.stream().mapToInt(Integer::intValue).toArray();
+        return hashMap.entrySet().stream().filter(Entry::getValue).mapToInt(Entry::getKey).toArray();
     }
 
 }
