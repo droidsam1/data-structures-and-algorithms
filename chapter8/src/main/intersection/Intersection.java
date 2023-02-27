@@ -17,6 +17,9 @@ public class Intersection {
         if (arr2.length > 1 && arr1[0] == arr2[1]) {
             return new int[]{arr1[0]};
         }
+        if (arr1.length > 1 && arr1[1] == arr2[0]) {
+            return new int[]{arr1[1]};
+        }
 
         return new int[]{};
     }
