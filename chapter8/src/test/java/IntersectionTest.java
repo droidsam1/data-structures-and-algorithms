@@ -14,7 +14,8 @@ class IntersectionTest {
         return Stream.of(
                 //result, arr1, arr2
                 Arguments.of(new int[]{2}, new int[]{1, 2}, new int[]{2}),//
-                Arguments.of(new int[]{2}, new int[]{2}, new int[]{1, 2})//
+                Arguments.of(new int[]{2}, new int[]{2}, new int[]{1, 2}),//
+                Arguments.of(new int[]{1, 2}, new int[]{1, 2}, new int[]{1, 2})//
 
         );
     }

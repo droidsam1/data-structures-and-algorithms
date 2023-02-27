@@ -1,5 +1,10 @@
 package intersection;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Intersection {
 
     private Intersection() {
@@ -11,16 +16,17 @@ public class Intersection {
             return new int[]{};
         }
 
-        if (arr1[0] == arr2[0]) {
-            return new int[]{arr1[0]};
-        }
-        if (arr2.length > 1 && arr1[0] == arr2[1]) {
-            return new int[]{arr1[0]};
-        }
-        if (arr1.length > 1 && arr1[1] == arr2[0]) {
-            return new int[]{arr1[1]};
+        List<Integer> result = new ArrayList<>();
+
+        for (int elementInArr1 : arr1) {
+            for (int elementInArr2 : arr2) {
+                if (elementInArr1 == elementInArr2) {
+                    result.add(elementInArr1);
+                }
+            }
         }
 
-        return new int[]{};
+        return result.stream().mapToInt(Integer::intValue).toArray();
     }
+
 }
