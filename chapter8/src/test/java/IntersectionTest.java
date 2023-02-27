@@ -25,4 +25,13 @@ class IntersectionTest {
         Assertions.assertArrayEquals(new int[]{1}, intersection);
     }
 
+    @Test void shouldReturnOneElementOnlyWhenArraysHaveSameElementButNotInOrder() {
+        var arr1 = new int[]{2};
+        var arr2 = new int[]{1,2};
+
+        var intersection = Intersection.of(arr1, arr2);
+
+        Assertions.assertArrayEquals(new int[]{2}, intersection);
+    }
+
 }
