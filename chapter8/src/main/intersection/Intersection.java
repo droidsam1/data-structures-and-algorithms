@@ -1,9 +1,7 @@
 package intersection;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.HashMap;
 
 public class Intersection {
 
@@ -16,14 +14,18 @@ public class Intersection {
             return new int[]{};
         }
 
-        List<Integer> result = new ArrayList<>();
+        var hashMap = new HashMap<>();
+
+        var result = new ArrayList<Integer>();
 
         for (int elementInArr1 : arr1) {
-            for (int elementInArr2 : arr2) {
-                if (elementInArr1 == elementInArr2) {
-                    result.add(elementInArr1);
-                }
+            hashMap.put(elementInArr1, false);
+        }
+        for (int elementInArr2 : arr2) {
+            if (hashMap.get(elementInArr2) != null) {
+                result.add(elementInArr2);
             }
+
         }
 
         return result.stream().mapToInt(Integer::intValue).toArray();

@@ -1,6 +1,8 @@
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
 import intersection.Intersection;
+import java.util.Arrays;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -31,8 +33,7 @@ class IntersectionTest {
     ) {
         var intersection = Intersection.of(arr1, arr2);
 
-        Assertions.assertArrayEquals(expected, intersection);
+        assertArrayEquals(Arrays.stream(expected).sorted().toArray(), Arrays.stream(intersection).sorted().toArray());
     }
-
 
 }
