@@ -2,7 +2,7 @@ package findFirstDuplicate;
 
 public class FirsDuplicate {
 
-    public static int[] find(int[] input) {
-        return new int[]{};
+    public static String[] find(String[] input) {
+        return new String[]{};
     }
 }
