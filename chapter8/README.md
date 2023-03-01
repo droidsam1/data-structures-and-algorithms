@@ -1,8 +1,15 @@
-# Exercises 
+# Exercises
+
 ## Chapter 8. Blazing fast lookups with hash tables
 
 1. Write a function that returns the intersection of two arrays.
-The intersection is a third array that contains all values contained within the first two arrays.
-For example, the intersection of [1, 2, 3, 4, 5] and [0, 2, 4, 6 , 8] is [2, 4].
-Your function should have a complexity of O(N). (If your programming language has a built-in way of doing this, don't use it.
-The idea is to build the algorithm yourself.)
+   The intersection is a third array that contains all values contained within the first two arrays.
+   For example, the intersection of [1, 2, 3, 4, 5] and [0, 2, 4, 6 , 8] is [2, 4].
+   Your function should have a complexity of O(N). (If your programming language has a built-in way
+   of doing this, don't use it.
+   The idea is to build the algorithm yourself.)
+2. Write a function that accepts an array of strings and returns the first duplicate value it finds.
+   For example, if the array is a ["a", "b", "c", "d", "c", "e", "f]. The function
+   should return "c". Since it's duplicated within the array. (You can assume that there's one
+   pair of duplicates within the array.)
+   Make sure the function has an efficiency of O(N)
