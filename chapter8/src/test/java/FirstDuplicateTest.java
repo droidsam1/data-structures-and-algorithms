@@ -1,4 +1,4 @@
-import findFirstDuplicate.FirsDuplicate;
+import find_first_duplicate.FirstDuplicate;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -15,12 +15,31 @@ class FirstDuplicateTest {
         );
     }
 
+    private static Stream<Arguments> arraysWithDuplicates() {
+        return Stream.of(
+                Arguments.of(new String[]{"a", "a"}, "a"),
+                Arguments.of(new String[]{"b", "b"}, "b"),
+                Arguments.of(new String[]{"b", "a", "c", "a", "b"}, "a"),
+                Arguments.of(new String[]{"b", "a", "z", "p", "j", "f", "f"}, "f"),
+                Arguments.of(new String[]{"1", "a", "z", "p", "f", "1", "f"}, "1")
+        );
+    }
+
     @ParameterizedTest @MethodSource("arraysWithoutDuplicates")
     void shouldReturnEmptyIfThereIsNoDuplicates(String[] input) {
 
-        var duplicates = FirsDuplicate.find(input);
+        var duplicates = FirstDuplicate.find(input);
 
         Assertions.assertArrayEquals(new String[]{}, duplicates);
+    }
+
+    @ParameterizedTest @MethodSource("arraysWithDuplicates") void shouldReturnFirstDuplicate(
+            String[] input, String firstDuplicate
+    ) {
+
+        var duplicates = FirstDuplicate.find(input);
+
+        Assertions.assertArrayEquals(new String[]{firstDuplicate}, duplicates);
     }
 
 }
