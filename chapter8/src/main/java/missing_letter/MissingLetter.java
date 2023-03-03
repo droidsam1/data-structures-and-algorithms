@@ -6,6 +6,11 @@ public class MissingLetter {
     }
 
     public static char findMissingLetterIn(String input) {
-        return 'a';
+        for (int i = 'a'; i <= 'z'; i++) {
+            if (!input.contains(Character.toString(i))) {
+                return (char) i;
+            }
+        }
+        throw new MissingLetterException();
     }
 }
