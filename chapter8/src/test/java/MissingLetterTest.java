@@ -12,7 +12,7 @@ class MissingLetterTest {
 
     private static final String ALPHABET_LETTERS = "abcdefghijklmnopqrstuvwxyz";
 
-    private static final int N_REPETITIONS_FOR_TEST = 10;
+    private static final int N_REPETITIONS_FOR_TEST = 10000;
 
     private static Stream<Arguments> generateRandomLetter() {
         Random r = new Random();
