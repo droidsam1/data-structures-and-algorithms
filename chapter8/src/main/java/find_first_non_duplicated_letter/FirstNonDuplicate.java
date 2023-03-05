@@ -6,6 +6,6 @@ public class FirstNonDuplicate {
     }
 
     public static Character find(String input) {
-        return 'm';
+        return input.charAt(0);
     }
 }
