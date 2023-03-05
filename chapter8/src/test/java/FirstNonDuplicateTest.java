@@ -8,8 +8,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 class FirstNonDuplicateTest {
 
     @ParameterizedTest
-    @CsvSource({"m,m", "n,n"})
-    void shouldReturnTheOnlyLetterIfThereIsOnlyOne(String input, String expected) {
+    @CsvSource({"m,m", "n,n", "A,A", "z,z", "mmn,n"})
+    void shouldReturnTheFirstNonDuplicateLetter(String input, String expected) {
 
         var firstNonDuplicate = FirstNonDuplicate.find(input);
 
