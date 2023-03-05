@@ -1,6 +1,5 @@
 import find_first_non_duplicated_letter.FirstNonDuplicate;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,7 +16,7 @@ class FirstNonDuplicateTest {
     }
 
 
-    @Disabled("while developing") @Test void shouldReturnTheFirstNonDuplicatedLetter() {
+    @Test void shouldReturnTheFirstNonDuplicatedLetter() {
         var input = "minimum";
 
         var firstNonDuplicate = FirstNonDuplicate.find(input);
