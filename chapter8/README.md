@@ -17,3 +17,7 @@
    and returns the missing letter. For example, the string, "the quick brown fox jumps over a lazy
    dog" contains all the letters of the alphabet except the letter, "f".
    The function should have a time complexity of O(N)
+4. Write a function that returns the first non-duplicated character ina a string.
+   For example, the string, "minimum" has two characters that only exist once--the "n" and the "u",
+   so your function should return the "n", since it occurs first. The function should have an
+   efficiency of O(N)
