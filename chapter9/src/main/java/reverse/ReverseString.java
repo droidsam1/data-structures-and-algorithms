@@ -1,15 +1,24 @@
 package reverse;
 
+import java.util.ArrayDeque;
+
 public class ReverseString {
 
     private ReverseString() {
     }
 
     public static String reverse(String input) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = input.length() - 1; i >= 0; i--) {
-            sb.append(input.charAt(i));
+        var stack = new ArrayDeque<>();
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
-        return sb.toString();
+
+        var stringBuilder = new StringBuilder();
+        while (!stack.isEmpty()) {
+            stringBuilder.append(stack.pop());
+        }
+
+        return stringBuilder.toString();
+
     }
 }
