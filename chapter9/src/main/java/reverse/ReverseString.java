@@ -3,14 +3,13 @@ package reverse;
 public class ReverseString {
 
     private ReverseString() {
-
     }
 
     public static String reverse(String input) {
-        if (input.length() == 1) {
-            return input;
+        StringBuilder sb = new StringBuilder();
+        for (int i = input.length() - 1; i >= 0; i--) {
+            sb.append(input.charAt(i));
         }
-
-        return String.valueOf(input.charAt(1)) + input.charAt(0);
+        return sb.toString();
     }
 }
