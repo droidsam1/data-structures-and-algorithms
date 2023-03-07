@@ -7,6 +7,10 @@ public class ReverseString {
     }
 
     public static String reverse(String input) {
-        return input;
+        if (input.length() == 1) {
+            return input;
+        }
+
+        return String.valueOf(input.charAt(1)) + input.charAt(0);
     }
 }

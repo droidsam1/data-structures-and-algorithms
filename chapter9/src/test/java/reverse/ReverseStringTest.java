@@ -16,6 +16,17 @@ class ReverseStringTest {
         Assertions.assertEquals(input, actual);
     }
 
+    @Test void shouldReverseTwoCharLengthStrings() {
+        var firstLetter = getRandomLetter();
+        var secondLetter = getRandomLetter();
+        var input = String.valueOf(firstLetter) + secondLetter;
+        var expected = String.valueOf(secondLetter) + firstLetter;
+
+        var actual = ReverseString.reverse(input);
+
+        Assertions.assertEquals(expected, actual);
+    }
+
     private char getRandomLetter() {
         Random r = new Random();
         return (char) (r.nextInt(26) + 'a');
