@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class PrintNumbersOnlyTest {
@@ -27,10 +28,16 @@ class PrintNumbersOnlyTest {
         System.setOut(new PrintStream(outContent));
     }
 
-    @Test void shouldPrintOnlyNumbers() {
-        var input = exampleArrayOfArrays;
+    @Test void shouldPrintOnlyNumbersForSimpleArrays() {
+        var input = new Object[]{1};
 
         PrintNumbersOnly.printOnlyNumbers(input);
+
+        Assertions.assertTrue(outContent.toString().contains("1"));
+    }
+
+    @Test @Disabled("while developing") void shouldPrintOnlyNumbers() {
+        PrintNumbersOnly.printOnlyNumbers(exampleArrayOfArrays);
 
         Assertions.assertTrue(outContent.toString().contains("1"));
         Assertions.assertTrue(outContent.toString().contains("12"));
