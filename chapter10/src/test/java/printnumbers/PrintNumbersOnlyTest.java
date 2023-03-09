@@ -36,6 +36,22 @@ class PrintNumbersOnlyTest {
         Assertions.assertTrue(outContent.toString().contains("1"));
     }
 
+    @Test void shouldPrintOnlyNumbersForNestedArrays() {
+        var input = new Object[]{new Object[]{1}};
+
+        PrintNumbersOnly.printOnlyNumbers(input);
+
+        Assertions.assertTrue(outContent.toString().contains("1"));
+    }
+
+    @Test void shouldPrintOnlyNumbersForNestedNestedArrays() {
+        var input = new Object[]{new Object[]{new Object[]{1}}};
+
+        PrintNumbersOnly.printOnlyNumbers(input);
+
+        Assertions.assertTrue(outContent.toString().contains("1"));
+    }
+
     @Test @Disabled("while developing") void shouldPrintOnlyNumbers() {
         PrintNumbersOnly.printOnlyNumbers(exampleArrayOfArrays);
 

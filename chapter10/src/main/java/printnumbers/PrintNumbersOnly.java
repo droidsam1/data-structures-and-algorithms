@@ -1,13 +1,19 @@
 package printnumbers;
 
-import java.util.Arrays;
-
 public class PrintNumbersOnly {
 
     private PrintNumbersOnly() {
     }
 
-    public static void printOnlyNumbers(Object[] input) {
-        System.out.println(Arrays.toString(input)); //NOSONAR
+    public static void printOnlyNumbers(Object input) {
+        if (input instanceof Number) {
+            System.out.println(input); //NOSONAR
+            return;
+        }
+        if (input instanceof Object[]) {
+            for (var o : (Object[]) input) {
+                printOnlyNumbers(o);
+            }
+        }
     }
 }
