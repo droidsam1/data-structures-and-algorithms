@@ -1,7 +1,7 @@
 package even_numbers;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class EvenNumbers {
 
@@ -9,17 +9,20 @@ public class EvenNumbers {
     }
 
     public static int[] getEvenNumbers(int[] input) {
-        return getEvenNumbers(input, 0, new ArrayList<>()).stream().mapToInt(i -> i).toArray();
-    }
-
-    private static List<Integer> getEvenNumbers(int[] input, int index, List<Integer> result) {
-        if (index == input.length) {
-            return result;
+        if (input.length == 0) {
+            return new int[]{};
         }
-        if (input[index] % 2 == 0) {
-            result.add(input[index]);
-        }
-        return getEvenNumbers(input, ++index, result);
 
+        if (input.length == 1) {
+            if (input[0] % 2 == 0) {
+                return new int[]{input[0]};
+            }
+            return new int[]{};
+        }
+
+        return IntStream.concat(
+                Arrays.stream(getEvenNumbers(Arrays.copyOfRange(input, 0, 1))),
+                Arrays.stream(getEvenNumbers(Arrays.copyOfRange(input, 1, input.length)))
+        ).toArray();
     }
 }
