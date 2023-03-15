@@ -12,12 +12,15 @@ class CountAllCharsTest {
 
     public static Stream<Arguments> shouldPrintAllChars() {
         return Stream.of(
-                Arguments.of(new String[]{"a"}, 1), //
-                Arguments.of(new String[]{""}, 0) //
+                Arguments.of(new Object[]{""}, 0), //
+                Arguments.of(new Object[]{"a"}, 1), //
+                Arguments.of(new Object[]{"a", "b"}, 2), //
+                Arguments.of(new Object[]{"a", new String[]{"b"}}, 2), //
+                Arguments.of(new Object[]{"a", new String[]{"b"}, "ab", new String[]{"ba", "ab"}}, 8) //
         );
     }
 
-    @ParameterizedTest @MethodSource void shouldPrintAllChars(String[] input, int expectedCountedChars) {
+    @ParameterizedTest @MethodSource void shouldPrintAllChars(Object input, int expectedCountedChars) {
 
         var actualCountedChars = CountAllChars.count(input);
 

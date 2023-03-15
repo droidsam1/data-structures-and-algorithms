@@ -3,8 +3,7 @@
 ## Chapter 11. Learning to write Recursive
 
 The following exercises provide you with the opportunity to practice with recursion. The solutions
-ot
-these exercises are found the section Chapter 11, on page 448
+of these exercises are found the section Chapter 11, on page 448
 
 1. Use recursion to write a function that accepts and array of strings and returns the total number
    of characters across all the strings. For example, if the input array
