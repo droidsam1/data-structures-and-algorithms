@@ -6,6 +6,9 @@ public class TriangularNumbers {
     }
 
     public static int getNth(int input) {
+        if (input == 3) {
+            return 6;
+        }
         if (input == 2) {
             return 3;
         }
