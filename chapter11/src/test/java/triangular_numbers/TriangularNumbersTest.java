@@ -9,7 +9,7 @@ class TriangularNumbersTest {
 
 
     @ParameterizedTest
-    @CsvSource(value = {"1,1", "2, 3", "3,6", "4,10"})
+    @CsvSource(value = {"1,1", "2, 3", "3,6", "4,10", "5,15", "6,21", "7,28"})
     void shouldReturnTheNthNumberInTheTriangularSequence(int input, int expected) {
 
         var result = TriangularNumbers.getNth(input);
