@@ -2,14 +2,15 @@ package triangular_numbers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class TriangularNumbersTest {
 
 
-    @Test void shouldReturnTheNthNumberInTheTriangularSequence() {
-        var input = 1;
-        var expected = 1;
+    @ParameterizedTest
+    @CsvSource(value = {"1,1"})
+    void shouldReturnTheNthNumberInTheTriangularSequence(int input, int expected) {
 
         var result = TriangularNumbers.getNth(input);
 
