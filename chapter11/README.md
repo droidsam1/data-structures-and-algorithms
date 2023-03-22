@@ -11,7 +11,7 @@ of these exercises are found the section Chapter 11, on page 448
    total
 2. Use recursion to write a function that accepts an array of numbers and returns a new array
    containing just the even numbers.
-3. There are a numerical sequence known as "Triangular Numbers". The pattern begins asa
+3. There are a numerical sequence known as "Triangular Numbers". The pattern begins as
    1,3,6,10,15,21 and continues onward wit the Nth number in the pattern, which is N plus the
    previous number. For example, the 7th number in the sequence is 29, since it's 7 (which is N)
    plus 21 (the previous number). Write a function that accepts a number for N and returns the
