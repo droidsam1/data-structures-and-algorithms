@@ -2,18 +2,18 @@ package x_finder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class XFinderTest {
 
 
-    @Test void shouldFindTheFirstXInString() {
-        var input = "x";
-        var expected = 0;
-
+    @ParameterizedTest
+    @CsvSource(value = {"x, 0"})
+    void shouldFindTheFirstXInString(String input, int expectedIndex) {
         var result = XFinder.indexOfXIn(input);
 
-        assertEquals(expected, result);
+        assertEquals(expectedIndex, result);
     }
 
 }
