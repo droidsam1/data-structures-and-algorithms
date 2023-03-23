@@ -6,6 +6,16 @@ public class XFinder {
     }
 
     public static int indexOfXIn(String input) {
-        return 0;
+        return indexOfXIn(input, 0);
     }
+
+    private static int indexOfXIn(String input, int index) {
+        if (input.equals("x")) {
+            return index;
+        }
+        index++;
+        return indexOfXIn(input.substring(index), index);
+    }
+
+
 }

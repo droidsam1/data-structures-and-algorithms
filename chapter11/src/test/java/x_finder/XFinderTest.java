@@ -9,7 +9,7 @@ class XFinderTest {
 
 
     @ParameterizedTest
-    @CsvSource(value = {"x, 0"})
+    @CsvSource(value = {"x, 0", "ax, 1"})
     void shouldFindTheFirstXInString(String input, int expectedIndex) {
         var result = XFinder.indexOfXIn(input);
 
