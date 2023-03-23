@@ -18,5 +18,5 @@ of these exercises are found the section Chapter 11, on page 448
    correct number from the series. That is, if the function was passed the number 7, the function
    would return 28.
 4. Use recursion to write a function that accepts a string and returns the first index that contains
-   the character "x". For example, the string "abcdefghijklmnopqrstuvwzyz" has an "x" at index 23. To
+   the character "x". For example, the string "abcdefghijklmnopqrstuxwzyz" has an "x" at index 23. To
    keep things simple, assume the string definitely has at least one "x".

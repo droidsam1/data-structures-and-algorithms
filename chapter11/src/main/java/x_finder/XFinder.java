@@ -10,7 +10,7 @@ public class XFinder {
     }
 
     private static int indexOfXIn(String input, int index) {
-        if (input.equals("x")) {
+        if (input.startsWith("x")) {
             return index;
         }
         index++;
