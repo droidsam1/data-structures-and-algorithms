@@ -14,7 +14,7 @@ public class XFinder {
             return index;
         }
         index++;
-        return indexOfXIn(input.substring(index), index);
+        return indexOfXIn(input.substring(1), index);
     }
 
 
