@@ -1,20 +1,19 @@
 package unique_paths;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class UniquePathsTest {
 
 
-    @Test
-    void shouldFindShortestPath() {
-        var inputRows = 2;
-        var inputCols = 2;
+    @ParameterizedTest
+    @CsvSource(value = {"2,2,2"})
+    void shouldFindShortestPath(int rows, int cols, int expectedUniquePaths) {
 
-        var result = UniquePaths.uniquePaths(inputRows, inputCols);
+        var result = UniquePaths.uniquePaths(rows, cols);
 
-        Assertions.assertEquals(2, result);
-
+        Assertions.assertEquals(expectedUniquePaths, result);
     }
 
 }
