@@ -6,6 +6,6 @@ public class UniquePaths {
     }
 
     public static int uniquePaths(int inputRows, int inputCols) {
-        return 2;
+        return inputRows;
     }
 }
