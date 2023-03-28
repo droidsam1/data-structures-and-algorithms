@@ -18,5 +18,31 @@ of these exercises are found the section Chapter 11, on page 448
    correct number from the series. That is, if the function was passed the number 7, the function
    would return 28.
 4. Use recursion to write a function that accepts a string and returns the first index that contains
-   the character "x". For example, the string "abcdefghijklmnopqrstuxwzyz" has an "x" at index 23. To
-   keep things simple, assume the string definitely has at least one "x".
+   the character "x". For example, the string "abcdefghijklmnopqrstuxwzyz" has an "x" at index 23.
+   To keep things simple, assume the string definitely has at least one "x".
+5. This problem is known as the "Unique Paths" problem: Let's say you have a grid of rows and
+   columns. Write a function that accepts a number of rows and a number of columns, and calculates
+   the number of possible "shortest" paths from the upper-leftmost square to the lower-rightmost
+   square. For example, here's what the grid looks like with three rows and seven columns. You want
+   to get from the "S" (Start) to the "F" (Finish)
+
+| S   |     |     |     |     |     |     |
+|-----|-----|-----|-----|-----|-----|-----|
+|     |     |     |     |     |     |     |
+|     |     |     |     |     |     | F   |
+
+By "shortest" path, I mean that at every step, you're moving either one step to the right:
+
+| S ➡️ |     |     |     |     |     |     |
+|------|-----|-----|-----|-----|-----|-----|
+|      |     |     |     |     |     |     |
+|      |     |     |     |     |     | F   |
+
+or one step downward:
+
+| S ⬇️ |     |     |     |     |     |     |
+|------|-----|-----|-----|-----|-----|-----|
+|      |     |     |     |     |     |     |
+|      |     |     |     |     |     | F   |
+
+Again your function should calculate the number of the shortest path
