@@ -8,7 +8,7 @@ class UniquePathsTest {
 
 
     @ParameterizedTest
-    @CsvSource(value = {"2,2,2", "3,3,3"})
+    @CsvSource(value = {"2,2,2", "3,3,6", "4,3,10", "3,7,28"})
     void shouldFindShortestPath(int rows, int cols, int expectedUniquePaths) {
 
         var result = UniquePaths.uniquePaths(rows, cols);

@@ -6,6 +6,10 @@ public class UniquePaths {
     }
 
     public static int uniquePaths(int inputRows, int inputCols) {
-        return inputRows;
+        if (inputRows == 1 || inputCols == 1) {
+            return 1;
+        }
+        return uniquePaths(inputRows - 1, inputCols) + uniquePaths(inputRows, inputCols - 1);
+
     }
 }
