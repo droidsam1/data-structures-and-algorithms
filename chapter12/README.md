@@ -15,7 +15,19 @@ def add_until_100(array)
     if array[0] + add_until_100(array[1, array.length -1]) > 100
         return add_until_100(array[1, array.length -1])
     else
-        return array[0] + add_untill_100(array[1, array.length -1])
+        return array[0] + add_until_100(array[1, array.length -1])
+    end
+end
+```
+- Solution:
+```
+def add_until_100(array)
+    return 0 if array.length == 0
+    sum_of_remaining = add_until_100(array[1, array.length -1]);
+    if array[0] +  sum_of_remaining > 100
+        return sum_of_remaining;
+    else
+        return array[0] + sum_of_remaining;
     end
 end
 ```
