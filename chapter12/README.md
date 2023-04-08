@@ -43,5 +43,15 @@ end
 ```
 def golomb()
    return 1 if n == 1
-   return 1 + golomb (n - golomb(golomb(n-1)));
+   return 1 + golomb(n - golomb(golomb(n-1)));
+```
+- Solution:
+
+```
+def golomb(golomb_sequence={})
+   return 1 if n == 1
+   if !golomb_sequence[n]
+      golomb_sequence[n] = 1 + golomb(n - golomb(golomb(n-1, golomb_sequence), golomb_sequence), golomb_sequence);
+   end if 
+   return golomb_sequence[n];
 ```
