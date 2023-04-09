@@ -44,6 +44,7 @@ end
 def golomb()
    return 1 if n == 1
    return 1 + golomb(n - golomb(golomb(n-1)));
+end
 ```
 - Solution:
 
@@ -52,6 +53,15 @@ def golomb(golomb_sequence={})
    return 1 if n == 1
    if !golomb_sequence[n]
       golomb_sequence[n] = 1 + golomb(n - golomb(golomb(n-1, golomb_sequence), golomb_sequence), golomb_sequence);
-   end if 
+   end 
    return golomb_sequence[n];
+end
+```
+
+3. Here is the solution to the "Unique Paths" problem from a exercise in the previous chapter. Use memoization to improve its efficiency
+```
+def unique_paths(rows, columns)
+   return 1 if rows == 1 || columns == 1
+   return unique_paths(rows - 1, columns) + unique_paths(rows, columns - 1)
+end 
 ```
