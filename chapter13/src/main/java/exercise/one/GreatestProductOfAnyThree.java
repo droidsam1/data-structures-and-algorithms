@@ -23,17 +23,17 @@ public class GreatestProductOfAnyThree {
     }
 
     private static void sortInPlace(int[] input) {
-        var isSorted = false;
-        while (!isSorted) {
-            isSorted = true;
-            for (int i = 0; i < input.length - 1; i++) {
-                if (input[i] < input[i + 1]) {
-                    var temp = input[i];
-                    input[i] = input[i + 1];
-                    input[i + 1] = temp;
-                    isSorted = false;
+        for (int i = 0; i < input.length; i++) {
+            var indexOfMax = i;
+            for (int j = i; j < input.length; j++) {
+                if (input[j] > input[indexOfMax]) {
+                    indexOfMax = j;
                 }
             }
+            //swap
+            var temp = input[i];
+            input[i] = input[indexOfMax];
+            input[indexOfMax] = temp;
         }
     }
 }
