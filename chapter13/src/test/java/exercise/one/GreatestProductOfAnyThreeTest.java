@@ -26,11 +26,19 @@ class GreatestProductOfAnyThreeTest {
 
     @Test
     void shouldReturnTheGreatestProductOfDescendingOrderInputs() {
-        var input = new int[]{10, 9, 8, 7, 6 ,5, 1};
+        var input = new int[]{10, 9, 8, 7, 6, 5, 1};
         var expectedProduct = 720;
 
         var result = GreatestProductOfAnyThree.of(input);
         Assertions.assertEquals(expectedProduct, result);
     }
 
+    @Test
+    void shouldReturnTheGreatestProductOfAnyOrderInputs() {
+        var input = new int[]{9, 2, 7, 0, -1, 8, 5, 10};
+        var expectedProduct = 720;
+
+        var result = GreatestProductOfAnyThree.of(input);
+        Assertions.assertEquals(expectedProduct, result);
+    }
 }
