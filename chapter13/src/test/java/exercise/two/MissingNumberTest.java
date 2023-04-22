@@ -10,9 +10,17 @@ class MissingNumberTest {
     void shouldReturnNullIfNotMissingNumber() {
         var input = new int[]{0};
 
-        var result = MissingNumber.of(input);
+        var result = MissingNumber.in(input);
         Assertions.assertNull(result);
     }
 
+    @Test
+    void shouldReturnMissingNumber() {
+        var input = new int[]{0, 2};
+        var expectedMissingNumber = 1;
+
+        var result = MissingNumber.in(input);
+        Assertions.assertEquals(expectedMissingNumber, result);
+    }
 
 }
