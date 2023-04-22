@@ -25,4 +25,13 @@ class MissingNumberTest {
         assertEquals(expectedMissingNumber, result);
     }
 
+    @Test
+    void shouldReturnMissingNumberInUnorderedInput() {
+        var input = new int[]{9,3,2,5,6,7,1,0,4};
+        var expectedMissingNumber = 8;
+
+        var result = MissingNumber.in(input);
+        assertEquals(expectedMissingNumber, result);
+    }
+
 }
