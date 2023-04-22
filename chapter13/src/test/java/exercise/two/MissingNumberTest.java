@@ -1,6 +1,8 @@
 package exercise.two;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.junit.jupiter.api.Test;
 
 class MissingNumberTest {
@@ -11,7 +13,7 @@ class MissingNumberTest {
         var input = new int[]{0};
 
         var result = MissingNumber.in(input);
-        Assertions.assertNull(result);
+        assertNull(result);
     }
 
     @Test
@@ -20,7 +22,7 @@ class MissingNumberTest {
         var expectedMissingNumber = 1;
 
         var result = MissingNumber.in(input);
-        Assertions.assertEquals(expectedMissingNumber, result);
+        assertEquals(expectedMissingNumber, result);
     }
 
 }
