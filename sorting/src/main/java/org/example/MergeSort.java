@@ -13,15 +13,7 @@ public class MergeSort implements SortingAlgorithm {
         if (input.length < 2) {
             return input;
         }
-        if (input.length == 2) {
-            if (input[0] > input[1]) {
-                var tmp = input[0];
-                input[0] = input[1];
-                input[1] = tmp;
 
-            }
-            return input;
-        }
         var middle = input.length / 2;
 
         var left = Arrays.stream(input).limit(middle).toArray();
