@@ -1,39 +1,52 @@
 package org.example;
 
-import java.util.Arrays;
-
 public class MergeSort implements SortingAlgorithm {
 
     @Override
     public int[] sort(int[] input) {
-        return mergeSort(input.clone());
+        var aCopy = input.clone();
+        mergeSort(aCopy, aCopy.length);
+        return aCopy;
     }
 
-    private int[] mergeSort(int[] input) {
-        if (input.length < 2) {
-            return input;
+    private void mergeSort(int[] input, int n) {
+        if (n < 2) {
+            return;
         }
 
-        var middle = input.length / 2;
+        var middle = n / 2;
 
-        var left = Arrays.stream(input).limit(middle).toArray();
-        var right = Arrays.stream(input).skip(middle).toArray();
+        var left = new int[middle];
+        var right = new int[input.length - middle];
+        for (int i = 0; i < input.length; i++) {
+            if (i < middle) {
+                left[i] = input[i];
+            } else {
+                right[i - middle] = input[i];
+            }
 
-        return merge(mergeSort(left), mergeSort(right));
-
+        }
+        mergeSort(left, middle);
+        mergeSort(right, n - middle);
+        merge(input, left, right, middle, n - middle);
     }
 
-    private int[] merge(int[] left, int[] right) {
-        var result = new int[left.length + right.length];
-        var j = 0;
-        var k = 0;
-        for (int i = 0; i < result.length; i++) {
-            if (j < left.length && (k >= right.length || left[j] < right[k])) {
-                result[i] = left[j++];
+    private void merge(int[] originalArray, int[] left, int[] right, int leftSize, int rightSize) {
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < leftSize && j < rightSize) {
+            if (left[i] <= right[j]) {
+                originalArray[k++] = left[i++];
             } else {
-                result[i] = right[k++];
+                originalArray[k++] = right[j++];
             }
         }
-        return result;
+        while (i < leftSize) {
+            originalArray[k++] = left[i++];
+        }
+        while (j < rightSize) {
+            originalArray[k++] = right[j++];
+        }
     }
 }
