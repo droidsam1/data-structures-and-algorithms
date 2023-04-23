@@ -2,26 +2,30 @@ package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-import org.junit.jupiter.api.Test;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class SortingTest {
 
-    @Test
-    void shouldSortInputWhenInputIsSorted() {
-        int[] input = new int[]{1, 2};
-
-        int[] result = Sorting.bubbleSort(input);
-
-        assertArrayEquals(new int[]{1, 2}, result);
+    public static Stream<Arguments> randomIntArray() {
+        return Stream.of(Arguments.of((Object) generateRandomArray()));
     }
 
-    @Test
-    void shouldSortInputWhenInputIsNotSorted() {
-        int[] input = new int[]{2, 1};
+    private static int[] generateRandomArray() {
+        return IntStream.generate(() -> new Random().nextInt(100) + 100).limit(2).toArray();
+    }
 
+    @ParameterizedTest
+    @MethodSource("randomIntArray")
+    void shouldSortInputWhenInputIsNotSorted(int[] input) {
         int[] result = Sorting.bubbleSort(input);
 
-        assertArrayEquals(new int[]{1, 2}, result);
+        assertArrayEquals(Arrays.stream(input).sorted().toArray(), result);
     }
 
 }
