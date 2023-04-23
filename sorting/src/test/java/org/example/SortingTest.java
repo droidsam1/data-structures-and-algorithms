@@ -13,11 +13,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 class SortingTest {
 
     public static Stream<Arguments> randomIntArray() {
-        return Stream.of(Arguments.of(generateRandomArray()));
+        return Stream.of(Arguments.of((Object) generateRandomArray()));
     }
 
     private static int[] generateRandomArray() {
-        return IntStream.generate(() -> new Random().nextInt(100) + 100).limit(3).toArray();
+        return IntStream.generate(() -> new Random().nextInt(100) + 100).limit(1000).toArray();
     }
 
     @ParameterizedTest
