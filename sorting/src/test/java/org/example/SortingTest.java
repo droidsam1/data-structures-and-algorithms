@@ -13,7 +13,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 class SortingTest {
 
     public static Stream<Arguments> shouldSortInput() {
-        return Stream.of(Arguments.of(new BubbleSort(), generateRandomArray()));
+        return Stream.of(
+                Arguments.of(new BubbleSort(), generateRandomArray()),
+                Arguments.of(new SelectionSort(), generateRandomArray())
+        );
     }
 
     private static int[] generateRandomArray() {
