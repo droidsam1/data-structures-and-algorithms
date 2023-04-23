@@ -1,25 +1,22 @@
 package org.example;
 
-public class Sorting {
+public class BubbleSort implements SortingAlgorithm {
 
-    private Sorting() {
-    }
-
-    public static int[] bubbleSort(int[] input) {
+    @Override
+    public int[] sort(int[] input) {
         var copy = input.clone();
         boolean isSorted = false;
-        while(!isSorted){
+        while (!isSorted) {
             isSorted = true;
             for (int i = 0; i < copy.length - 1; i++) {
                 if (copy[i] > copy[i + 1]) {
                     var tmp = copy[i];
                     copy[i] = copy[i + 1];
                     copy[i + 1] = tmp;
-                    isSorted= false;
+                    isSorted = false;
                 }
             }
         }
-
 
         return copy;
     }

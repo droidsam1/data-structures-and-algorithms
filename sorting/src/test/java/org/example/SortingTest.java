@@ -23,7 +23,7 @@ class SortingTest {
     @ParameterizedTest
     @MethodSource("randomIntArray")
     void shouldSortInputWhenInputIsNotSorted(int[] input) {
-        int[] result = Sorting.bubbleSort(input);
+        int[] result = new BubbleSort().sort(input);
 
         assertArrayEquals(Arrays.stream(input).sorted().toArray(), result);
     }
