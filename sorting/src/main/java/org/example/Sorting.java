@@ -2,9 +2,18 @@ package org.example;
 
 public class Sorting {
 
-    public static int[] bubbleSort(int[] input) {
+    private Sorting() {
+    }
 
-        return input;
+    public static int[] bubbleSort(int[] input) {
+        var copy = input.clone();
+        if (copy[0] > copy[1]) {
+            var tmp = copy[0];
+            copy[0] = copy[1];
+            copy[1] = tmp;
+        }
+
+        return copy;
     }
 
 
