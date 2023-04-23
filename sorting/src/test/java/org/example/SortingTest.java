@@ -40,5 +40,13 @@ class SortingTest {
         assertArrayEquals(Arrays.stream(input).sorted().toArray(), result);
     }
 
+    @RepeatedTest(REPETITIONS)
+    void shouldSortUsingMergeSort() {
+        var input = generateRandomArray();
+        int[] result = new MergeSort().sort(input);
+
+        assertArrayEquals(Arrays.stream(input).sorted().toArray(), result);
+    }
+
 
 }
