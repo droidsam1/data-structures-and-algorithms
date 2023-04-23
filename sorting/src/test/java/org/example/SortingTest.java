@@ -12,8 +12,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class SortingTest {
 
-    public static Stream<Arguments> randomIntArray() {
-        return Stream.of(Arguments.of((Object) generateRandomArray()));
+    public static Stream<Arguments> shouldSortInput() {
+        return Stream.of(Arguments.of(new BubbleSort(), generateRandomArray()));
     }
 
     private static int[] generateRandomArray() {
@@ -21,9 +21,9 @@ class SortingTest {
     }
 
     @ParameterizedTest
-    @MethodSource("randomIntArray")
-    void shouldSortInputWhenInputIsNotSorted(int[] input) {
-        int[] result = new BubbleSort().sort(input);
+    @MethodSource("shouldSortInput")
+    void shouldSortInput(SortingAlgorithm sortingAlgorithm, int[] input) {
+        int[] result = sortingAlgorithm.sort(input);
 
         assertArrayEquals(Arrays.stream(input).sorted().toArray(), result);
     }
