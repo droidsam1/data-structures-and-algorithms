@@ -48,5 +48,13 @@ class SortingTest {
         assertArrayEquals(Arrays.stream(input).sorted().toArray(), result);
     }
 
+    @RepeatedTest(REPETITIONS)
+    void shouldSortUsingQuickSort() {
+        var input = generateRandomArray();
+        int[] result = new QuickSort().sort(input);
+
+        assertArrayEquals(Arrays.stream(input).sorted().toArray(), result);
+    }
+
 
 }
