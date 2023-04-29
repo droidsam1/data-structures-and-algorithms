@@ -1,7 +1,5 @@
 package exercise.two;
 
-import java.util.stream.IntStream;
-
 public class MissingNumber {
 
     private MissingNumber() {
@@ -18,40 +16,35 @@ public class MissingNumber {
     }
 
     private static int[] sort(int[] input) {
-        if (input.length < 2) {
-            return input;
-        }
-        if (input.length == 2) {
-            if (input[0] > input[1]) {
-                var tmp = input[0];
-                input[0] = input[1];
-                input[1] = tmp;
-            }
-            return input;
-        } else {
-            var middle = input.length / 2;
-
-            var left = IntStream.of(input).limit(middle).toArray();
-            var right = IntStream.of(input).skip(middle).toArray();
-
-            return merge(sort(left), sort(right));
-        }
-
+        var aCopy = input.clone();
+        quickSort(aCopy, 0, aCopy.length-1);
+        return aCopy;
     }
 
-
-    private static int[] merge(int[] left, int[] right) {
-        var result = new int[left.length + right.length];
-
-        int j = 0;
-        int k = 0;
-        for (int i = 0; i < result.length; i++) {
-            if (j < left.length && (k >= right.length || left[j] < right[k])) {
-                result[i] = left[j++];
-            } else {
-                result[i] = right[k++];
+    private static void quickSort(int[] input, int fromIndex, int toIndex) {
+        if (fromIndex >= toIndex) {
+            return;
+        }
+        var swapIndex = fromIndex;
+        for (int currentIndex = fromIndex; currentIndex < toIndex; currentIndex++) {
+            if (input[currentIndex] < input[toIndex]) {
+                if (currentIndex > swapIndex) {
+                    //swap
+                    var temp = input[swapIndex];
+                    input[swapIndex] = input[currentIndex];
+                    input[currentIndex] = temp;
+                }
+                swapIndex++;
             }
         }
-        return result;
+
+        //swap
+        var temp = input[swapIndex];
+        input[swapIndex] = input[toIndex];
+        input[toIndex] = temp;
+
+        quickSort(input, fromIndex, swapIndex -1);
+        quickSort(input, swapIndex, toIndex);
     }
+
 }
