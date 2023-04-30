@@ -2,10 +2,10 @@ package exercise;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import linkedlist.NaiveLinkedList;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
+import linkedlist.NaiveLinkedList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ class PrintLinkedListTest {
     }
 
     @Test
-    void shouldPrintAllElementsInList() {
+    void shouldPrintAllElementsWhenIntegerList() {
         var input = new NaiveLinkedList<>(List.of(1, 2, 3, 4, 5));
 
         input.print();
@@ -36,6 +36,18 @@ class PrintLinkedListTest {
         assertTrue(mockedSystemOut.toString().contains("3"));
         assertTrue(mockedSystemOut.toString().contains("4"));
         assertTrue(mockedSystemOut.toString().contains("5"));
+    }
+
+    @Test
+    void shouldPrintAllElementsWhenStringList() {
+        var input = new NaiveLinkedList<>().add("stem").add("word").add("rule").add("another");
+
+        input.print();
+
+        assertTrue(mockedSystemOut.toString().contains("stem"));
+        assertTrue(mockedSystemOut.toString().contains("word"));
+        assertTrue(mockedSystemOut.toString().contains("rule"));
+        assertTrue(mockedSystemOut.toString().contains("another"));
     }
 
 }

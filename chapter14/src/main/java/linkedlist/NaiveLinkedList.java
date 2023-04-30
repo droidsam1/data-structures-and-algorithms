@@ -6,6 +6,10 @@ public class NaiveLinkedList<T> {
 
     private Node<T> head;
 
+    public NaiveLinkedList() {
+        this.head = null;
+    }
+
     public NaiveLinkedList(List<T> aList) {
         if (aList == null) {
             throw new IllegalArgumentException();
@@ -33,7 +37,7 @@ public class NaiveLinkedList<T> {
         }
     }
 
-    public void add(T value) {
+    public NaiveLinkedList<T> add(T value) {
         if (head == null) {
             head = new Node<>(value);
         } else {
@@ -43,6 +47,7 @@ public class NaiveLinkedList<T> {
             }
             node.next = new Node<>(value);
         }
+        return this;
     }
 
     public T get(int index) {
