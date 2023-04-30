@@ -31,11 +31,11 @@ class PrintLinkedListTest {
 
         input.print();
 
-        assertTrue(mockedSystemOut.toString().contains("1"));
+        assertTrue(mockedSystemOut.toString().startsWith("1"));
         assertTrue(mockedSystemOut.toString().contains("2"));
         assertTrue(mockedSystemOut.toString().contains("3"));
-        assertTrue(mockedSystemOut.toString().contains("4"));
-        assertTrue(mockedSystemOut.toString().contains("5"));
+        assertTrue(mockedSystemOut.toString().trim().contains("4"));
+        assertTrue(mockedSystemOut.toString().strip().endsWith("5"));
     }
 
     @Test
@@ -44,10 +44,10 @@ class PrintLinkedListTest {
 
         input.print();
 
-        assertTrue(mockedSystemOut.toString().contains("stem"));
+        assertTrue(mockedSystemOut.toString().startsWith("stem"));
         assertTrue(mockedSystemOut.toString().contains("word"));
         assertTrue(mockedSystemOut.toString().contains("rule"));
-        assertTrue(mockedSystemOut.toString().contains("another"));
+        assertTrue(mockedSystemOut.toString().strip().contains("another"));
     }
 
 }
