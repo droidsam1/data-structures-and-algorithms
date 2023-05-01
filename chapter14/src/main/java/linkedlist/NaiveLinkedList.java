@@ -71,6 +71,27 @@ public class NaiveLinkedList<T> {
         return currentNode.value;
     }
 
+    public NaiveLinkedList<T> reverse() {
+
+        var size = getSize() - 1;
+        var reversedLinkedList = new NaiveLinkedList<T>();
+        for (int i = size; i >= 0; i--) {
+            reversedLinkedList.add(this.get(i));
+        }
+
+        return reversedLinkedList;
+    }
+
+    private int getSize() {
+        var currentNode = head;
+        var numberOfElements = 0;
+        while (currentNode != null) {
+            currentNode = currentNode.next;
+            numberOfElements++;
+        }
+        return numberOfElements;
+    }
+
     private static class Node<T> {
 
         private final T value;
