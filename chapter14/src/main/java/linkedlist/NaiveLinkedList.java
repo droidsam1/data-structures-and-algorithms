@@ -61,6 +61,16 @@ public class NaiveLinkedList<T> {
         return currentNode.value;
     }
 
+    public T getLast() {
+
+        var currentNode = head;
+
+        while (currentNode.next != null) {
+            currentNode = currentNode.next;
+        }
+        return currentNode.value;
+    }
+
     private static class Node<T> {
 
         private final T value;

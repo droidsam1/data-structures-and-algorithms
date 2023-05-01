@@ -1,5 +1,6 @@
 package exercise;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
@@ -10,7 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class PrintLinkedListTest {
+class LinkedListTest {
 
     private final ByteArrayOutputStream mockedSystemOut = new ByteArrayOutputStream();
     private final PrintStream systemOut = System.out;
@@ -48,6 +49,13 @@ class PrintLinkedListTest {
         assertTrue(mockedSystemOut.toString().contains("word"));
         assertTrue(mockedSystemOut.toString().contains("rule"));
         assertTrue(mockedSystemOut.toString().strip().contains("another"));
+    }
+
+    @Test
+    void shouldReturnLastElement(){
+        var input = new NaiveLinkedList<>().add("stem").add("word").add("rule").add("another");
+
+        assertEquals("another", input.getLast());
     }
 
 }
