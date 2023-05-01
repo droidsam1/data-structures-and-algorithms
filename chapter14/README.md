@@ -10,3 +10,6 @@ to these exercises are found in the section, Chapter 14, on page 453.
    order
 3. Add a method to the classic LinkedList class that returns the last element from the list. Assume
    you don't know how many elements are in the list.
+4. Here's a tricky one. Add a method to the classic LinkedLIst class that reverses the list. That
+   is, if the original list is A -> B -> C, all the list's links should change so that C -> B ->
+   A
