@@ -51,6 +51,12 @@ public class NaiveLinkedList<T> {
     }
 
     public T get(int index) {
+        var nodeAtIndex = getNodeAt(index);
+        return nodeAtIndex != null ? nodeAtIndex.value : null;
+
+    }
+
+    protected Node<T> getNodeAt(int index) {
         var currentNode = head;
         while (index-- > 0) {
             if (currentNode == null) {
@@ -58,7 +64,7 @@ public class NaiveLinkedList<T> {
             }
             currentNode = currentNode.next;
         }
-        return currentNode.value;
+        return currentNode;
     }
 
     public T getLast() {
