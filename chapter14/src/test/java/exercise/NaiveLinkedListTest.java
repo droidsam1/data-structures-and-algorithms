@@ -11,7 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class LinkedListTest {
+class NaiveLinkedListTest {
 
     private final ByteArrayOutputStream mockedSystemOut = new ByteArrayOutputStream();
     private final PrintStream systemOut = System.out;
