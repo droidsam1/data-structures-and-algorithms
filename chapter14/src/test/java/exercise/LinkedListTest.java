@@ -52,10 +52,17 @@ class LinkedListTest {
     }
 
     @Test
-    void shouldReturnLastElement(){
+    void shouldReturnLastElement() {
         var input = new NaiveLinkedList<>().add("stem").add("word").add("rule").add("another");
 
         assertEquals("another", input.getLast());
+    }
+
+    @Test
+    void shouldReturnLastElementWhenConstructorList() {
+        var input = new NaiveLinkedList<>(List.of(1, 2, 3, 4, 5));
+
+        assertEquals(5, input.getLast());
     }
 
 }
