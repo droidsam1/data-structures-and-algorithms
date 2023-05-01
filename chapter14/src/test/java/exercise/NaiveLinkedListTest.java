@@ -70,10 +70,12 @@ class NaiveLinkedListTest {
         var input = new NaiveLinkedList<>().add("stem").add("word").add("rule").add("another");
         var expectedReversed = new NaiveLinkedList<>().add("another").add("rule").add("word").add("stem");
 
-        assertEquals(expectedReversed.get(0), input.reverse().get(0));
-        assertEquals(expectedReversed.get(1), input.reverse().get(1));
-        assertEquals(expectedReversed.get(2), input.reverse().get(2));
-        assertEquals(expectedReversed.get(3), input.reverse().get(3));
+        input.reverse();
+
+        assertEquals(expectedReversed.get(0), input.get(0));
+        assertEquals(expectedReversed.get(1), input.get(1));
+        assertEquals(expectedReversed.get(2), input.get(2));
+        assertEquals(expectedReversed.get(3), input.get(3));
     }
 
 }
