@@ -1,6 +1,7 @@
 package linkedlist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
@@ -47,7 +48,7 @@ class NaiveLinkedListTest {
         assertTrue(mockedSystemOut.toString().startsWith("stem"));
         assertTrue(mockedSystemOut.toString().contains("word"));
         assertTrue(mockedSystemOut.toString().contains("rule"));
-        assertTrue(mockedSystemOut.toString().strip().contains("another"));
+        assertTrue(mockedSystemOut.toString().strip().endsWith("another"));
     }
 
     @Test
@@ -75,6 +76,18 @@ class NaiveLinkedListTest {
         assertEquals(expectedReversed.get(1), input.get(1));
         assertEquals(expectedReversed.get(2), input.get(2));
         assertEquals(expectedReversed.get(3), input.get(3));
+    }
+
+    @Test
+    void shouldRemoveAElementInTheMiddleOfTheListWithoutTheUsingTheList() {
+        var originalList = new NaiveLinkedList<>().add("stem").add("word").add("rule").add("another");
+
+        originalList.getNodeAt(2).removeItSelf();
+
+        assertEquals("stem", originalList.get(0));
+        assertEquals("word", originalList.get(1));
+        assertEquals("another", originalList.get(2));
+        assertNull(originalList.get(3));
     }
 
 }

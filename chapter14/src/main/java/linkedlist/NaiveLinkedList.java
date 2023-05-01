@@ -91,13 +91,22 @@ public class NaiveLinkedList<T> {
         this.head = previousNode;
     }
 
-    private static class Node<T> {
+    protected static class Node<T> {
 
-        private final T value;
+        private T value;
         private Node<T> next;
 
         Node(T value) {
             this.value = value;
+        }
+
+        protected void removeItSelf() {
+            if (next == null) {
+                throw new IllegalArgumentException("This method cannot remove the last element of the list");
+            }
+            this.value = next.value;
+            this.next = next.next;
+
         }
 
     }
