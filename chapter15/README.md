@@ -53,3 +53,18 @@ B[ Great Expectations ] --> D[ Lord of the flies ]
 ````
 
 ``R: The order would be: Moby Dick, Great Expectations, Alice In wonderland, Lord of the Flies, Robinson Crusoe, Pride and Prejudice and The Odyssey``
+
+5. There is yet another form of traversal called postorder traversal. HEre is the code as applied to
+   our book app:
+
+````
+def traverse_and_print(node):
+   if node is None:
+      return
+   traverse_and_print(node.leftChild)
+   traverse_and_print(node.righChild)
+   print(node.value)
+````
+
+For the example tree in the text (which also appears in the previous exercise), write out the order
+in which the book titles are printed with postorder traversal.
