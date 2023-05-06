@@ -22,4 +22,6 @@ H(( 6 )) --> I(( 8 ))
 ```
 
 2. If a well-balanced binary search tree contains 1000 values, what is the maximum number of steps
-   it would take to search of a value within it?<br/>```The maximum number of stepts would be log(1000) = 10```
+   it would take to search of a value within
+   it?<br/>```The maximum number of stepts would be log(1000) = 10```
+3. Write an algorithm that finds the greatest value within a binary search tree.
