@@ -7,25 +7,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class BinarySearchTreeTest {
 
-    private PrintStream originalOutput;
     private ByteArrayOutputStream fakeOutput;
 
     @BeforeEach
     public void setup() {
-        this.originalOutput = System.out;
         this.fakeOutput = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(this.fakeOutput));
-    }
-
-    @AfterEach
-    public void cleanUp() {
-        System.setOut(this.originalOutput);
     }
 
 
@@ -55,7 +46,7 @@ class BinarySearchTreeTest {
     void shouldPrintPreOrderTraversal() {
         var inputArray = new Integer[]{1, 5, 9, 2, 4, 10, 6, 3, 8};
 
-        var binarySearchTree = new BinarySearchTree<>(inputArray);
+        var binarySearchTree = new BinarySearchTree<>(inputArray, new PrintStream(fakeOutput));
         binarySearchTree.preOrderTraversalPrint();
 
         assertEquals("1 5 2 4 3 9 6 8 10", fakeOutput.toString(UTF_8).trim());
@@ -65,7 +56,7 @@ class BinarySearchTreeTest {
     void shouldPrintInOrderTraversal() {
         var inputArray = new Integer[]{1, 5, 9, 2, 4, 10, 6, 3, 8};
 
-        var binarySearchTree = new BinarySearchTree<>(inputArray);
+        var binarySearchTree = new BinarySearchTree<>(inputArray, new PrintStream(fakeOutput));
         binarySearchTree.inOrderTraversalPrint();
 
         assertEquals("1 2 3 4 5 6 8 9 10", fakeOutput.toString(UTF_8).trim());
@@ -75,7 +66,7 @@ class BinarySearchTreeTest {
     void shouldPrintPostOrderTraversal() {
         var inputArray = new Integer[]{1, 5, 9, 2, 4, 10, 6, 3, 8};
 
-        var binarySearchTree = new BinarySearchTree<>(inputArray);
+        var binarySearchTree = new BinarySearchTree<>(inputArray, new PrintStream(fakeOutput));
         binarySearchTree.postOrderTraversalPrint();
 
         assertEquals("3 4 2 8 6 10 9 5 1", fakeOutput.toString(UTF_8).trim());
@@ -83,6 +74,8 @@ class BinarySearchTreeTest {
 
     @Test
     void shouldPrintPostOrderForTheExampleOfTheBook() {
+        var fakeOutput = new ByteArrayOutputStream();
+
         var inputArray = new String[]{
                 "Moby Dick",
                 "Great Expectations",
@@ -93,7 +86,7 @@ class BinarySearchTreeTest {
                 "The Odyssey"
         };
 
-        var binarySearchTree = new BinarySearchTree<>(inputArray);
+        var binarySearchTree = new BinarySearchTree<>(inputArray, new PrintStream(fakeOutput));
         binarySearchTree.postOrderTraversalPrint();
 
         assertEquals(
