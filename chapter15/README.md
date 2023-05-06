@@ -51,3 +51,5 @@ E[Robinson Crusoe ] --> G[ The Odyssey ]
 B[ Great Expectations ] --> C[ Alice in Wonderland ]
 B[ Great Expectations ] --> D[ Lord of the flies ]
 ````
+
+``R: The order would be: Moby Dick, Great Expectations, Alice In wonderland, Lord of the Flies, Robinson Crusoe, Pride and Prejudice and The Odyssey``
