@@ -68,3 +68,4 @@ def traverse_and_print(node):
 
 For the example tree in the text (which also appears in the previous exercise), write out the order
 in which the book titles are printed with postorder traversal.
+``R: The order would be: Alice in Wonderland, Lord of the Flies, Great Expectations, Pride and Prejudice, The Odyssey, Robinson Crusoe, Moby Dick``
