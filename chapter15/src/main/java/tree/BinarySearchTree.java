@@ -8,7 +8,11 @@ public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> head;
 
     public BinarySearchTree(T[] inputArray) {
-        logger = System.out;
+        this(inputArray, System.out);
+    }
+
+    public BinarySearchTree(T[] inputArray, PrintStream logger) {
+        this.logger = logger;
         for (T value : inputArray) {
             add(new Node<>(value));
         }
