@@ -7,8 +7,7 @@ solutions to these exercises are found in the section, Chapter 15, on page 456.
 
 1. Imagine you were to take an empty binary search tree and insert the following sequence of numbers
    in this order: [1,5,9,2,4,10,6,3,8] <br/> Draw a diagram showing what the binary search tree
-   would look like. Remember, the numbers are being inserted in the order presented here.
-   Here is a simple flow chart:
+   would look like. Remember, the numbers are being inserted in the order presented here.<br/>
 
 ```mermaid
 graph TB;
@@ -21,3 +20,6 @@ C(( 9 )) --> H(( 6 ));
 C(( 9 )) --> F(( 10 ));
 H(( 6 )) --> I(( 8 ))
 ```
+
+2. If a well-balanced binary search tree contains 1000 values, what is the maximum number of steps
+   it would take to search of a value within it?
