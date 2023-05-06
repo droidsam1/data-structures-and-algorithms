@@ -65,6 +65,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
     }
 
+    public void preorderTraversalPrint() {
+        var currentNode = head;
+        if (currentNode == null) {
+            return;
+        }
+        preorderTraversalPrint(currentNode);
+    }
+
+    public void preorderTraversalPrint(Node<T> currentNode) {
+        if (currentNode == null) {
+            return;
+        }
+        System.out.printf("%s ", currentNode.value);
+        preorderTraversalPrint(currentNode.left);
+        preorderTraversalPrint(currentNode.right);
+    }
+
+
     private static class Node<T extends Comparable<T>> {
 
         private final T value;
