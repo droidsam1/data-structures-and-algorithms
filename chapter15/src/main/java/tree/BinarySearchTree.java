@@ -1,10 +1,14 @@
 package tree;
 
+import java.io.PrintStream;
+
 public class BinarySearchTree<T extends Comparable<T>> {
 
+    private final PrintStream logger;
     private Node<T> head;
 
     public BinarySearchTree(T[] inputArray) {
+        logger = System.out;
         for (T value : inputArray) {
             add(new Node<>(value));
         }
@@ -106,6 +110,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         postOrderTraversalPrint(currentNode);
     }
+
     private void postOrderTraversalPrint(Node<T> currentNode) {
         if (currentNode == null) {
             return;
@@ -116,7 +121,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private void print(Node<T> currentNode) {
-        System.out.printf("%s ", currentNode.value);
+        logger.printf("%s ", currentNode.value);
     }
 
     private static class Node<T extends Comparable<T>> {
