@@ -71,5 +71,15 @@ class BinarySearchTreeTest {
         assertEquals("1 2 3 4 5 6 8 9 10", fakeOutput.toString(UTF_8).trim());
     }
 
+    @Test
+    void shouldPrintPostOrderTraversal() {
+        var inputArray = new Integer[]{1, 5, 9, 2, 4, 10, 6, 3, 8};
+
+        var binarySearchTree = new BinarySearchTree<>(inputArray);
+        binarySearchTree.postOrderTraversalPrint();
+
+        assertEquals("3 4 2 8 6 10 9 5 1", fakeOutput.toString(UTF_8).trim());
+    }
+
 
 }

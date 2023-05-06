@@ -99,6 +99,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
         inOrderTraversalPrint(currentNode.right);
     }
 
+    public void postOrderTraversalPrint() {
+        var currentNode = head;
+        if (currentNode == null) {
+            return;
+        }
+        postOrderTraversalPrint(currentNode);
+    }
+    private void postOrderTraversalPrint(Node<T> currentNode) {
+        if (currentNode == null) {
+            return;
+        }
+        postOrderTraversalPrint(currentNode.left);
+        postOrderTraversalPrint(currentNode.right);
+        System.out.printf("%s ", currentNode.value);
+    }
+
     private static class Node<T extends Comparable<T>> {
 
         private final T value;
