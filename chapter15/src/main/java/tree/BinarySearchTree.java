@@ -51,6 +51,19 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return false;
     }
 
+    public T getGreatestValue() {
+        var currentNode = head;
+        if (currentNode == null) {
+            return null;
+        }
+
+        while (currentNode.right != null) {
+            currentNode = currentNode.right;
+        }
+
+        return currentNode.value;
+
+    }
 
     private static class Node<T extends Comparable<T>> {
 
@@ -58,17 +71,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
         private Node<T> left;
         private Node<T> right;
 
-
         private Node(T value) {
             this.value = value;
-        }
-
-        public void setRight(Node<T> right) {
-            this.right = right;
-        }
-
-        public void setLeft(Node<T> left) {
-            this.left = left;
         }
     }
 
