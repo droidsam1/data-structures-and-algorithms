@@ -14,10 +14,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
         var currentNode = head;
         if (currentNode == null) {
             head = node;
-            return;
         }
 
-        while (currentNode.left != null || currentNode.right != null) {
+        while (currentNode != null) {
             if (node.value.compareTo(currentNode.value) > 0) {
                 if (currentNode.right == null) {
                     currentNode.right = node;
@@ -34,8 +33,22 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    public boolean contains(int i) {
-        return true;
+    public boolean contains(T value) {
+        var currentNode = head;
+        if (currentNode == null) {
+            return false;
+        }
+        while (currentNode != null) {
+            if (value.compareTo(currentNode.value) == 0) {
+                return true;
+            }
+            if (value.compareTo(currentNode.value) > 0) {
+                currentNode = currentNode.right;
+            } else {
+                currentNode = currentNode.left;
+            }
+        }
+        return false;
     }
 
 
