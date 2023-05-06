@@ -52,13 +52,23 @@ class BinarySearchTreeTest {
     }
 
     @Test
-    void shouldPrintPreorderTraversal() {
+    void shouldPrintPreOrderTraversal() {
         var inputArray = new Integer[]{1, 5, 9, 2, 4, 10, 6, 3, 8};
 
         var binarySearchTree = new BinarySearchTree<>(inputArray);
-        binarySearchTree.preorderTraversalPrint();
+        binarySearchTree.preOrderTraversalPrint();
 
         assertEquals("1 5 2 4 3 9 6 8 10", fakeOutput.toString(UTF_8).trim());
+    }
+
+    @Test
+    void shouldPrintInOrderTraversal() {
+        var inputArray = new Integer[]{1, 5, 9, 2, 4, 10, 6, 3, 8};
+
+        var binarySearchTree = new BinarySearchTree<>(inputArray);
+        binarySearchTree.inOrderTraversalPrint();
+
+        assertEquals("1 2 3 4 5 6 8 9 10", fakeOutput.toString(UTF_8).trim());
     }
 
 
