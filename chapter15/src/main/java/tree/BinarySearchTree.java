@@ -77,7 +77,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         if (currentNode == null) {
             return;
         }
-        System.out.printf("%s ", currentNode.value);
+        print(currentNode);
         preOrderTraversalPrint(currentNode.left);
         preOrderTraversalPrint(currentNode.right);
     }
@@ -95,7 +95,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return;
         }
         inOrderTraversalPrint(currentNode.left);
-        System.out.printf("%s ", currentNode.value);
+        print(currentNode);
         inOrderTraversalPrint(currentNode.right);
     }
 
@@ -112,6 +112,10 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         postOrderTraversalPrint(currentNode.left);
         postOrderTraversalPrint(currentNode.right);
+        print(currentNode);
+    }
+
+    private void print(Node<T> currentNode) {
         System.out.printf("%s ", currentNode.value);
     }
 

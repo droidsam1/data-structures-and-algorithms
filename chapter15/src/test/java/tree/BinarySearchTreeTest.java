@@ -81,5 +81,26 @@ class BinarySearchTreeTest {
         assertEquals("3 4 2 8 6 10 9 5 1", fakeOutput.toString(UTF_8).trim());
     }
 
+    @Test
+    void shouldPrintPostOrderForTheExampleOfTheBook() {
+        var inputArray = new String[]{
+                "Moby Dick",
+                "Great Expectations",
+                "Robinson Crusoe",
+                "Alice in Wonderland",
+                "Lord of the Flies",
+                "Pride and Prejudice",
+                "The Odyssey"
+        };
+
+        var binarySearchTree = new BinarySearchTree<>(inputArray);
+        binarySearchTree.postOrderTraversalPrint();
+
+        assertEquals(
+                "Alice in Wonderland Lord of the Flies Great Expectations Pride and Prejudice The Odyssey Robinson Crusoe Moby Dick",
+                fakeOutput.toString(UTF_8).trim()
+        );
+    }
+
 
 }
