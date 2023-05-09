@@ -54,4 +54,26 @@ B2(( 8 )) --> C4(( 4 ))
 
 3. Imagine you've built a brand-new heap by inserting the following numbers into the heap in this
    particular order: 55, 22, 34, 10, 2, 99, 68. If you then pop them from the heap one at a time and
-   insert the numbers into a new array, in what order would the numbers now appear?g
+   insert the numbers into a new array, in what order would the numbers now appear? <br/>
+   ```
+   R: It would appear in ascending/descending order 
+   Depending on heap condition:
+    * if is max heap->then it would appear in descending order
+    * if is a min heap -> it then appear in ascending order)
+   
+This would be an example for a max heap:
+
+```mermaid
+graph TB;
+A(( 99 )) --> B1(( 22 ))
+A(( 99 )) --> B2(( 68 ))
+
+B1(( 22 )) --> C1(( 10 ))
+B1(( 22 )) --> C2(( 2 ))
+
+B2(( 68 )) --> C3(( 34 ))
+B2(( 68 )) --> C4(( 55 ))
+```
+A resource where you can visualize the iterations (insertion, deletion, creation) step by step
+* http://btv.melezinek.cz/binary-heap.html
+* https://visualgo.net/en/heap
