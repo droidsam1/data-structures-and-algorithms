@@ -30,11 +30,13 @@ class BasicMaxHeapTest {
 
     @Test
     void shouldPopTheTopElement() {
-        var input = new Integer[]{55, 10};
+        var input = new Integer[]{2, 22, 34, 10};
 
         var heap = new BasicMaxHeap<>(input);
 
-        assertEquals(55, heap.pop());
+        assertEquals(34, heap.pop());
+        assertEquals(22, heap.pop());
         assertEquals(10, heap.pop());
+        assertEquals(2, heap.pop());
     }
 }

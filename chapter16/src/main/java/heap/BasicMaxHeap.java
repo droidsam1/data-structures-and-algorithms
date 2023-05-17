@@ -48,9 +48,40 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
 
     public T pop() {
         var topElement = data.get(0);
-        data.remove(0);
+        trickleDown();
         return topElement;
     }
+
+    private void trickleDown() {
+        var lastChildIndex = data.size() - 1;
+        var lastChild = data.get(lastChildIndex);
+        var parent = 0;
+        data.set(parent, lastChild);
+        data.remove(lastChildIndex);
+
+        while (true) {
+            var leftChild = getChild(parent);
+            var rightChild = leftChild + 1;
+            if (leftChild > data.size() - 1 || rightChild > data.size() - 1) {
+                break;
+            }
+            var childWithGreaterValue = Math.max(leftChild, rightChild);
+            swapWithChild(parent, childWithGreaterValue);
+            parent = childWithGreaterValue;
+        }
+    }
+
+    private void swapWithChild(int parentIndex, int leftChildIndex) {
+        var leftChildValue = data.get(leftChildIndex);
+        var parentValue = data.get(parentIndex);
+        data.set(leftChildIndex, parentValue);
+        data.set(parentIndex, leftChildValue);
+    }
+
+    private int getChild(int elementIndex) {
+        return Math.min(elementIndex * 2 + 1, data.size());
+    }
+
 }
 
 
