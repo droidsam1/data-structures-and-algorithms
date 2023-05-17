@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -25,8 +26,16 @@ class BasicMaxHeapTest {
     void shouldReturnTheMax(Integer[] input, Integer expectedTopElement) {
         var heap = new BasicMaxHeap<>(input);
 
-        assertNotNull(heap);
         assertEquals(expectedTopElement, heap.getTopElement());
     }
 
+    @Test
+    void shouldPopTheTopElement(){
+        var input = new Integer[]{55};
+        var expectedTopElement = 55;
+
+        var heap = new BasicMaxHeap<>(input);
+
+        assertEquals(expectedTopElement, heap.pop());
+    }
 }

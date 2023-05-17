@@ -45,6 +45,10 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
     public T getTopElement() {
         return data.get(0);
     }
+
+    public T pop() {
+        return data.get(0);
+    }
 }
 
 
