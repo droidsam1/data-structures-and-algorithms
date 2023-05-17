@@ -47,7 +47,9 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
     }
 
     public T pop() {
-        return data.get(0);
+        var topElement = data.get(0);
+        data.remove(0);
+        return topElement;
     }
 }
 

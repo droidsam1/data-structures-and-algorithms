@@ -1,7 +1,6 @@
 package heap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
@@ -30,12 +29,12 @@ class BasicMaxHeapTest {
     }
 
     @Test
-    void shouldPopTheTopElement(){
-        var input = new Integer[]{55};
-        var expectedTopElement = 55;
+    void shouldPopTheTopElement() {
+        var input = new Integer[]{55, 10};
 
         var heap = new BasicMaxHeap<>(input);
 
-        assertEquals(expectedTopElement, heap.pop());
+        assertEquals(55, heap.pop());
+        assertEquals(10, heap.pop());
     }
 }
