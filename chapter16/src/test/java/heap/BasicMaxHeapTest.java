@@ -14,8 +14,8 @@ class BasicMaxHeapTest {
         return Stream.of(
                 Arguments.of((Object) new Integer[]{55}),
                 Arguments.of((Object) new Integer[]{55, 10}),
-                Arguments.of((Object) new Integer[]{10, 55})
-
+                Arguments.of((Object) new Integer[]{10, 55}),
+                Arguments.of((Object) new Integer[]{22, 34, 10, 2, 55})
         );
     }
 
