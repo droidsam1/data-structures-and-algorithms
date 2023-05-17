@@ -12,20 +12,21 @@ class BasicMaxHeapTest {
 
     private static Stream<Object> shouldReturnTheMax() {
         return Stream.of(
-                Arguments.of((Object) new Integer[]{55}),
-                Arguments.of((Object) new Integer[]{55, 10}),
-                Arguments.of((Object) new Integer[]{10, 55}),
-                Arguments.of((Object) new Integer[]{22, 34, 10, 2, 55})
+                Arguments.of(new Integer[]{55}, 55),
+                Arguments.of(new Integer[]{55, 10}, 55),
+                Arguments.of(new Integer[]{10, 55}, 55),
+                Arguments.of(new Integer[]{2, 22, 34, 10}, 34),
+                Arguments.of(new Integer[]{55, 22, 34, 10, 2, 99, 68}, 99)
         );
     }
 
     @ParameterizedTest
     @MethodSource
-    void shouldReturnTheMax(Integer[] input) {
+    void shouldReturnTheMax(Integer[] input, Integer expectedTopElement) {
         var heap = new BasicMaxHeap<>(input);
 
         assertNotNull(heap);
-        assertEquals(55, heap.getTopElement());
+        assertEquals(expectedTopElement, heap.getTopElement());
     }
 
 }

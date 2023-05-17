@@ -22,7 +22,6 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
 
     private void trickleUpNodeAt(int elementIndex) {
         var currentElement = data.get(elementIndex);
-
         var parentIndex = getParentOf(elementIndex);
 
         while (true) {
