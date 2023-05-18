@@ -2,6 +2,7 @@ package heap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
 public class BasicMaxHeap<T extends Comparable<? super T>> {
 
@@ -18,13 +19,13 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
         for (int i = 1; i < input.length; i++) {
             this.data.add(input[i]);
             if (input[i].compareTo(this.data.get(0)) > 0) {
-                trickleUpNodeAt(i);
+                trickleUpNodeAtIndex(i);
             }
         }
 
     }
 
-    private void trickleUpNodeAt(int elementIndex) {
+    private void trickleUpNodeAtIndex(int elementIndex) {
         var currentElement = data.get(elementIndex);
         var parentIndex = getParentOf(elementIndex);
 
@@ -64,38 +65,39 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
         data.set(parent, lastChild);
         data.remove(lastChildIndex);
 
-        while (true) {
-            boolean noSwap = true;
+        while (parent < data.size() - 1) {
             var leftChild = getChild(parent);
             var rightChild = leftChild - 1;
-            if (leftChild > data.size() - 1 && rightChild > data.size() - 1) {
+            var greatestChild = getGreatestChild(leftChild, rightChild, parent);
+            if (greatestChild.isPresent()) {
+                swapValuesAtIndex(parent, greatestChild.getAsInt());
+                parent = leftChild;
+            } else {
                 break;
             }
-
-            if (leftChild <= data.size() - 1 && rightChild <= data.size() - 1 && (data.get(leftChild)
-                                                                                      .compareTo(data.get(rightChild)) > 0)) {
-                swapWithChild(parent, leftChild);
-                parent = leftChild;
-                continue;
-
-            }
-
-            if (leftChild <= data.size() - 1 && data.get(leftChild).compareTo(data.get(parent)) > 0) {
-                swapWithChild(parent, leftChild);
-                parent = leftChild;
-                continue;
-            }
-
-            if (rightChild <= data.size() - 1 && data.get(rightChild).compareTo(data.get(parent)) > 0) {
-                swapWithChild(parent, rightChild);
-                parent = rightChild;
-                continue;
-            }
-            break;
         }
     }
 
-    private void swapWithChild(int parentIndex, int childIndex) {
+    private OptionalInt getGreatestChild(int leftChild, int rightChild, int parent) {
+        if (leftChild <= data.size() - 1 && rightChild <= data.size() - 1) {
+            if ((data.get(leftChild).compareTo(data.get(rightChild)) > 0)) {
+                return OptionalInt.of(leftChild);
+            } else {
+                return OptionalInt.of(rightChild);
+            }
+        }
+
+        if (leftChild <= data.size() - 1 && data.get(leftChild).compareTo(data.get(parent)) > 0) {
+            return OptionalInt.of(leftChild);
+        }
+
+        if (rightChild <= data.size() - 1 && data.get(rightChild).compareTo(data.get(parent)) > 0) {
+            return OptionalInt.of(rightChild);
+        }
+        return OptionalInt.empty();
+    }
+
+    private void swapValuesAtIndex(int parentIndex, int childIndex) {
         var leftChildValue = data.get(childIndex);
         var parentValue = data.get(parentIndex);
         data.set(childIndex, parentValue);
@@ -109,7 +111,7 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
     public void add(T number) {
         this.data.add(number);
         if (number.compareTo(this.data.get(0)) > 0) {
-            trickleUpNodeAt(this.data.size() - 1);
+            trickleUpNodeAtIndex(this.data.size() - 1);
         }
     }
 }
