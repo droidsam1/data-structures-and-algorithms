@@ -33,6 +33,7 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
             if (currentElement.compareTo(parent) > 0) {
                 data.set(elementIndex, parent);
                 data.set(parentIndex, currentElement);
+                elementIndex = parentIndex;
                 parentIndex = getParentOf(parentIndex);
             } else {
                 break;
@@ -42,7 +43,7 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
     }
 
     private int getParentOf(int elementIndex) {
-        return Math.max(elementIndex / 2 - 1, 0);
+        return Math.max((elementIndex - 1) / 2, 0);
     }
 
 
@@ -64,26 +65,45 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
         data.remove(lastChildIndex);
 
         while (true) {
+            boolean noSwap = true;
             var leftChild = getChild(parent);
-            var rightChild = leftChild + 1;
-            if (leftChild > data.size() - 1 || rightChild > data.size() - 1) {
+            var rightChild = leftChild - 1;
+            if (leftChild > data.size() - 1 && rightChild > data.size() - 1) {
                 break;
             }
-            var childWithGreaterValue = Math.max(leftChild, rightChild);
-            swapWithChild(parent, childWithGreaterValue);
-            parent = childWithGreaterValue;
+
+            if (leftChild <= data.size() - 1 && rightChild <= data.size() - 1 && (data.get(leftChild)
+                                                                                      .compareTo(data.get(rightChild)) > 0)) {
+                swapWithChild(parent, leftChild);
+                parent = leftChild;
+                continue;
+
+            }
+
+            if (leftChild <= data.size() - 1 && data.get(leftChild).compareTo(data.get(parent)) > 0) {
+                swapWithChild(parent, leftChild);
+                parent = leftChild;
+                continue;
+            }
+
+            if (rightChild <= data.size() - 1 && data.get(rightChild).compareTo(data.get(parent)) > 0) {
+                swapWithChild(parent, rightChild);
+                parent = rightChild;
+                continue;
+            }
+            break;
         }
     }
 
-    private void swapWithChild(int parentIndex, int leftChildIndex) {
-        var leftChildValue = data.get(leftChildIndex);
+    private void swapWithChild(int parentIndex, int childIndex) {
+        var leftChildValue = data.get(childIndex);
         var parentValue = data.get(parentIndex);
-        data.set(leftChildIndex, parentValue);
+        data.set(childIndex, parentValue);
         data.set(parentIndex, leftChildValue);
     }
 
     private int getChild(int elementIndex) {
-        return Math.min(elementIndex * 2 + 1, data.size());
+        return (elementIndex + 1) * 2;
     }
 
     public void add(T number) {

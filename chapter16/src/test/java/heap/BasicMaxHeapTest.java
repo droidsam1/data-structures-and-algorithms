@@ -43,6 +43,21 @@ class BasicMaxHeapTest {
     private <T extends Comparable<? super T>> T max(List<T> list) {
         return list.stream().max(Comparator.naturalOrder()).orElseThrow();
     }
+    @Test
+    void shouldTopElementAlwaysBeTheMax() {
+        var heap = new BasicMaxHeap<Integer>();
+        var inputList = List.of(55, 22, 34, 10, 2, 99);
+        for (Integer number : inputList) {
+            heap.add(number);
+        }
+
+        assertEquals(99, heap.pop());
+        assertEquals(55, heap.pop());
+        assertEquals(34, heap.pop());
+        assertEquals(22, heap.pop());
+        assertEquals(10, heap.pop());
+    }
+
 
     @Test
     void shouldPopTheTopElement() {
