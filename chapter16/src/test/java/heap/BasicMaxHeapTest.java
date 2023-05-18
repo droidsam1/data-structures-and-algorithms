@@ -2,6 +2,8 @@ package heap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,6 +28,20 @@ class BasicMaxHeapTest {
         var heap = new BasicMaxHeap<>(input);
 
         assertEquals(expectedTopElement, heap.getTopElement());
+    }
+
+    @Test
+    void shouldAllowToAddElements() {
+        var heap = new BasicMaxHeap<Integer>();
+        var inputList = List.of(55, 22, 34, 10, 2, 99);
+        for (Integer number : inputList) {
+            heap.add(number);
+        }
+        assertEquals(max(inputList), heap.getTopElement());
+    }
+
+    private <T extends Comparable<? super T>> T max(List<T> list) {
+        return list.stream().max(Comparator.naturalOrder()).orElseThrow();
     }
 
     @Test

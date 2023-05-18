@@ -8,8 +8,12 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
 
     private final List<T> data;
 
-    public BasicMaxHeap(T[] input) {
+    public BasicMaxHeap() {
         this.data = new ArrayList<>();
+    }
+
+    public BasicMaxHeap(T[] input) {
+        this();
         this.data.add(input[0]);
         for (int i = 1; i < input.length; i++) {
             this.data.add(input[i]);
@@ -82,6 +86,12 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
         return Math.min(elementIndex * 2 + 1, data.size());
     }
 
+    public void add(T number) {
+        this.data.add(number);
+        if (number.compareTo(this.data.get(0)) > 0) {
+            trickleUpNodeAt(this.data.size() - 1);
+        }
+    }
 }
 
 
