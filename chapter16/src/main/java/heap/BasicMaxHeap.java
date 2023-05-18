@@ -40,7 +40,6 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
                 break;
             }
         }
-
     }
 
     private int getParentOf(int elementIndex) {
@@ -54,31 +53,25 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
 
     public T pop() {
         var topElement = data.get(0);
-        trickleDown();
+        var lastChild = data.get(data.size() - 1);
+        data.set(0, lastChild);
+        data.remove(data.size() - 1);
+        trickleDown(0);
         return topElement;
     }
 
-    private void trickleDown() {
-        var lastChildIndex = data.size() - 1;
-        var lastChild = data.get(lastChildIndex);
-        var parent = 0;
-        data.set(parent, lastChild);
-        data.remove(lastChildIndex);
-
-        while (parent < data.size() - 1) {
-            var leftChild = getChild(parent);
-            var rightChild = leftChild - 1;
-            var greatestChild = getGreatestChild(leftChild, rightChild, parent);
-            if (greatestChild.isPresent()) {
-                swapValuesAtIndex(parent, greatestChild.getAsInt());
-                parent = leftChild;
-            } else {
-                break;
-            }
+    private void trickleDown(int elementIndex) {
+        var rightChild = getChild(elementIndex);
+        var leftChild = rightChild - 1;
+        var greatestChild = getGreatestChild(leftChild, rightChild);
+        if (greatestChild.isPresent()) {
+            swapValuesAtIndex(elementIndex, greatestChild.getAsInt());
+            trickleDown(greatestChild.getAsInt());
         }
     }
 
-    private OptionalInt getGreatestChild(int leftChild, int rightChild, int parent) {
+    private OptionalInt getGreatestChild(int leftChild, int rightChild) {
+        var parent = getParentOf(leftChild);
         if (leftChild <= data.size() - 1 && rightChild <= data.size() - 1) {
             if ((data.get(leftChild).compareTo(data.get(rightChild)) > 0)) {
                 return OptionalInt.of(leftChild);
