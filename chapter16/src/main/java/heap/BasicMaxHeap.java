@@ -19,26 +19,20 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
         for (int i = 1; i < input.length; i++) {
             this.data.add(input[i]);
             if (input[i].compareTo(this.data.get(0)) > 0) {
-                trickleUpNodeAtIndex(i);
+                trickleUp(i);
             }
         }
-
     }
 
-    private void trickleUpNodeAtIndex(int elementIndex) {
+    private void trickleUp(int elementIndex) {
         var currentElement = data.get(elementIndex);
         var parentIndex = getParentOf(elementIndex);
+        var parent = data.get(parentIndex);
 
-        while (true) {
-            var parent = data.get(parentIndex);
-            if (currentElement.compareTo(parent) > 0) {
-                data.set(elementIndex, parent);
-                data.set(parentIndex, currentElement);
-                elementIndex = parentIndex;
-                parentIndex = getParentOf(parentIndex);
-            } else {
-                break;
-            }
+        if (currentElement.compareTo(parent) > 0) {
+            data.set(elementIndex, parent);
+            data.set(parentIndex, currentElement);
+            trickleUp(parentIndex);
         }
     }
 
@@ -104,7 +98,7 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
     public void add(T number) {
         this.data.add(number);
         if (number.compareTo(this.data.get(0)) > 0) {
-            trickleUpNodeAtIndex(this.data.size() - 1);
+            trickleUp(this.data.size() - 1);
         }
     }
 }
