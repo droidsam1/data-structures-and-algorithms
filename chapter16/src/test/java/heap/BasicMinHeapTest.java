@@ -6,7 +6,9 @@ import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -65,27 +67,37 @@ class BasicMinHeapTest {
 
     @Test
     void shouldPopTheTopElement() {
-        var input = new Integer[]{2, 22, 34, 10};
-
+        var input = new Integer[]{0, 7, 2, 4, 9, 3, 6, 1};
         var heap = new BasicMinHeap<>(input);
 
+        assertEquals(0, heap.pop());
+        assertEquals(1, heap.pop());
         assertEquals(2, heap.pop());
-        assertEquals(10, heap.pop());
-        assertEquals(22, heap.pop());
-        assertEquals(34, heap.pop());
+        assertEquals(3, heap.pop());
+        assertEquals(4, heap.pop());
+        assertEquals(6, heap.pop());
+        assertEquals(7, heap.pop());
+        assertEquals(9, heap.pop());
     }
 
     @Test
     void shouldTheMinElementBeAtTheTop() {
-        var input = new Integer[]{2, 22, 34, 10};
-        var expectedOutputOrder = Arrays.stream(input)
-                                        .sorted(Comparator.naturalOrder())
-                                        .collect(Collectors.toCollection(ArrayDeque::new));
+        var input = generateRandomInput();
+        var expectedOutput = Arrays.stream(input)
+                                   .sorted(Comparator.naturalOrder())
+                                   .collect(Collectors.toCollection(ArrayDeque::new));
 
         var heap = new BasicMinHeap<>(input);
 
         while (!heap.isEmpty()) {
-            assertEquals(expectedOutputOrder.pop(), heap.pop());
+            assertEquals(expectedOutput.pop(), heap.pop());
         }
+    }
+
+    private Integer[] generateRandomInput() {
+        return IntStream.generate(() -> ThreadLocalRandom.current().nextInt())
+                        .limit(1000)
+                        .boxed()
+                        .toArray((Integer[]::new));
     }
 }

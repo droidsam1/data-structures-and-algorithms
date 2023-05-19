@@ -19,7 +19,8 @@ public class BasicHeap<T extends Comparable<? super T>> {
 
     public void add(T number) {
         this.data.add(number);
-        if (comparator.compare(number, this.data.get(0)) > 0) {
+        var parent = getParentOf(this.data.size() - 1);
+        if (comparator.compare(number, this.data.get(parent)) > 0) {
             trickleUp(this.data.size() - 1);
         }
 
