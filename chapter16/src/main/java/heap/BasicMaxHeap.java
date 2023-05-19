@@ -1,6 +1,7 @@
 package heap;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.OptionalInt;
 
@@ -8,9 +9,11 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
 
 
     private final List<T> data;
+    private final Comparator<T> comparator;
 
     public BasicMaxHeap() {
         this.data = new ArrayList<>();
+        this.comparator = Comparator.naturalOrder();
     }
 
     public BasicMaxHeap(T[] input) {
@@ -22,9 +25,10 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
 
     public void add(T number) {
         this.data.add(number);
-        if (number.compareTo(this.data.get(0)) > 0) {
+        if (comparator.compare(number, this.data.get(0)) > 0) {
             trickleUp(this.data.size() - 1);
         }
+
     }
 
     private void trickleUp(int elementIndex) {
@@ -32,7 +36,7 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
         var parentIndex = getParentOf(elementIndex);
         var parent = data.get(parentIndex);
 
-        if (currentElement.compareTo(parent) > 0) {
+        if (comparator.compare(currentElement, parent) > 0) {
             data.set(elementIndex, parent);
             data.set(parentIndex, currentElement);
             trickleUp(parentIndex);
@@ -74,18 +78,18 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
     private OptionalInt getGreatestChild(int leftChild, int rightChild) {
         var parent = getParentOf(leftChild);
         if (leftChild <= data.size() - 1 && rightChild <= data.size() - 1) {
-            if ((data.get(leftChild).compareTo(data.get(rightChild)) > 0)) {
+            if (comparator.compare(data.get(leftChild), data.get(rightChild)) > 0) {
                 return OptionalInt.of(leftChild);
             } else {
                 return OptionalInt.of(rightChild);
             }
         }
 
-        if (leftChild <= data.size() - 1 && data.get(leftChild).compareTo(data.get(parent)) > 0) {
+        if (leftChild <= data.size() - 1 && comparator.compare(data.get(leftChild), data.get(parent)) > 0) {
             return OptionalInt.of(leftChild);
         }
 
-        if (rightChild <= data.size() - 1 && data.get(rightChild).compareTo(data.get(parent)) > 0) {
+        if (rightChild <= data.size() - 1 && comparator.compare(data.get(rightChild), data.get(parent)) > 0) {
             return OptionalInt.of(rightChild);
         }
         return OptionalInt.empty();
