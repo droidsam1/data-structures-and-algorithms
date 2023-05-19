@@ -1,6 +1,7 @@
 package heap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Comparator;
 import java.util.List;
@@ -43,6 +44,7 @@ class BasicMaxHeapTest {
     private <T extends Comparable<? super T>> T max(List<T> list) {
         return list.stream().max(Comparator.naturalOrder()).orElseThrow();
     }
+
     @Test
     void shouldTopElementAlwaysBeTheMax() {
         var heap = new BasicMaxHeap<Integer>();
@@ -58,16 +60,10 @@ class BasicMaxHeapTest {
         assertEquals(10, heap.pop());
     }
 
-
     @Test
-    void shouldPopTheTopElement() {
-        var input = new Integer[]{2, 22, 34, 10};
+    void shouldReturnTrueWhenHeapIsEmpty() {
+        var heap = new BasicMaxHeap<>();
 
-        var heap = new BasicMaxHeap<>(input);
-
-        assertEquals(34, heap.pop());
-        assertEquals(22, heap.pop());
-        assertEquals(10, heap.pop());
-        assertEquals(2, heap.pop());
+        assertTrue(heap.isEmpty());
     }
 }

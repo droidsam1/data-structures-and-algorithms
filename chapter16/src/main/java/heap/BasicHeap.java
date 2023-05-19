@@ -99,6 +99,10 @@ public class BasicHeap<T extends Comparable<? super T>> {
         data.set(childIndex, parentValue);
         data.set(parentIndex, leftChildValue);
     }
+
+    public boolean isEmpty() {
+        return data.isEmpty();
+    }
 }
 
 
