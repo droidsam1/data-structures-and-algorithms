@@ -72,7 +72,7 @@ class BasicMaxHeapTest {
 
     @Test
     void shouldTheMaxElementBeAtTheTop() {
-        var input = new Integer[]{2, 22, 34, 10};
+        var input = RandomUtils.generateRandomInput();
         var expectedOutputOrder = Arrays.stream(input)
                                         .sorted(Comparator.reverseOrder())
                                         .collect(Collectors.toCollection(ArrayDeque::new));

@@ -1,5 +1,6 @@
 package heap;
 
+import static heap.RandomUtils.generateRandomInput;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayDeque;
@@ -92,12 +93,5 @@ class BasicMinHeapTest {
         while (!heap.isEmpty()) {
             assertEquals(expectedOutput.pop(), heap.pop());
         }
-    }
-
-    private Integer[] generateRandomInput() {
-        return IntStream.generate(() -> ThreadLocalRandom.current().nextInt())
-                        .limit(1000)
-                        .boxed()
-                        .toArray((Integer[]::new));
     }
 }
