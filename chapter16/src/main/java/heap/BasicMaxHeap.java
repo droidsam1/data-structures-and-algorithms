@@ -15,12 +15,15 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
 
     public BasicMaxHeap(T[] input) {
         this();
-        this.data.add(input[0]);
-        for (int i = 1; i < input.length; i++) {
-            this.data.add(input[i]);
-            if (input[i].compareTo(this.data.get(0)) > 0) {
-                trickleUp(i);
-            }
+        for (T element : input) {
+            this.add(element);
+        }
+    }
+
+    public void add(T number) {
+        this.data.add(number);
+        if (number.compareTo(this.data.get(0)) > 0) {
+            trickleUp(this.data.size() - 1);
         }
     }
 
@@ -64,6 +67,10 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
         }
     }
 
+    private int getChild(int elementIndex) {
+        return (elementIndex + 1) * 2;
+    }
+
     private OptionalInt getGreatestChild(int leftChild, int rightChild) {
         var parent = getParentOf(leftChild);
         if (leftChild <= data.size() - 1 && rightChild <= data.size() - 1) {
@@ -89,17 +96,6 @@ public class BasicMaxHeap<T extends Comparable<? super T>> {
         var parentValue = data.get(parentIndex);
         data.set(childIndex, parentValue);
         data.set(parentIndex, leftChildValue);
-    }
-
-    private int getChild(int elementIndex) {
-        return (elementIndex + 1) * 2;
-    }
-
-    public void add(T number) {
-        this.data.add(number);
-        if (number.compareTo(this.data.get(0)) > 0) {
-            trickleUp(this.data.size() - 1);
-        }
     }
 }
 
