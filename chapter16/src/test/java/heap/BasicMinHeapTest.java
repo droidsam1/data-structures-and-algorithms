@@ -2,8 +2,11 @@ package heap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +30,7 @@ class BasicMinHeapTest {
     void shouldReturnTheMax(Integer[] input, Integer expectedTopElement) {
         var heap = new BasicMinHeap<>(input);
 
-        assertEquals(expectedTopElement, heap.getTopElement());
+        assertEquals(expectedTopElement, heap.peek());
     }
 
     @Test
@@ -37,7 +40,7 @@ class BasicMinHeapTest {
         for (Integer number : inputList) {
             heap.add(number);
         }
-        assertEquals(min(inputList), heap.getTopElement());
+        assertEquals(min(inputList), heap.peek());
     }
 
     private <T extends Comparable<? super T>> T min(List<T> list) {
@@ -70,5 +73,19 @@ class BasicMinHeapTest {
         assertEquals(10, heap.pop());
         assertEquals(22, heap.pop());
         assertEquals(34, heap.pop());
+    }
+
+    @Test
+    void shouldTheMinElementBeAtTheTop() {
+        var input = new Integer[]{2, 22, 34, 10};
+        var expectedOutputOrder = Arrays.stream(input)
+                                        .sorted(Comparator.naturalOrder())
+                                        .collect(Collectors.toCollection(ArrayDeque::new));
+
+        var heap = new BasicMinHeap<>(input);
+
+        while (!heap.isEmpty()) {
+            assertEquals(expectedOutputOrder.pop(), heap.pop());
+        }
     }
 }

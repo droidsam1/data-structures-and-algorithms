@@ -3,8 +3,11 @@ package heap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,7 +31,7 @@ class BasicMaxHeapTest {
     void shouldReturnTheMax(Integer[] input, Integer expectedTopElement) {
         var heap = new BasicMaxHeap<>(input);
 
-        assertEquals(expectedTopElement, heap.getTopElement());
+        assertEquals(expectedTopElement, heap.peek());
     }
 
     @Test
@@ -38,7 +41,7 @@ class BasicMaxHeapTest {
         for (Integer number : inputList) {
             heap.add(number);
         }
-        assertEquals(max(inputList), heap.getTopElement());
+        assertEquals(max(inputList), heap.peek());
     }
 
     private <T extends Comparable<? super T>> T max(List<T> list) {
@@ -65,5 +68,19 @@ class BasicMaxHeapTest {
         var heap = new BasicMaxHeap<>();
 
         assertTrue(heap.isEmpty());
+    }
+
+    @Test
+    void shouldTheMaxElementBeAtTheTop() {
+        var input = new Integer[]{2, 22, 34, 10};
+        var expectedOutputOrder = Arrays.stream(input)
+                                        .sorted(Comparator.reverseOrder())
+                                        .collect(Collectors.toCollection(ArrayDeque::new));
+
+        var heap = new BasicMaxHeap<>(input);
+
+        while (!heap.isEmpty()) {
+            assertEquals(expectedOutputOrder.pop(), heap.pop());
+        }
     }
 }

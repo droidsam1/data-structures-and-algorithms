@@ -42,7 +42,7 @@ public class BasicHeap<T extends Comparable<? super T>> {
     }
 
 
-    public T getTopElement() {
+    public T peek() {
         return data.get(0);
     }
 
