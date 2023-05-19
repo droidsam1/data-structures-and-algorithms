@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.OptionalInt;
+import java.util.function.IntPredicate;
 
 public class BasicHeap<T extends Comparable<? super T>> {
 
@@ -54,22 +55,26 @@ public class BasicHeap<T extends Comparable<? super T>> {
         return topElement;
     }
 
-    private void trickleDown(int elementIndex) {
-        var rightChild = getChild(elementIndex);
-        var leftChild = rightChild - 1;
-        var greatestChild = getGreatestChild(leftChild, rightChild);
+    private void trickleDown(int parent) {
+        var greatestChild = findGreatestChildOf(parent).stream().filter(valueGreaterThan(parent)).findFirst();
         if (greatestChild.isPresent()) {
-            swapValuesAtIndex(elementIndex, greatestChild.getAsInt());
+            swapValuesAtIndex(parent, greatestChild.getAsInt());
             trickleDown(greatestChild.getAsInt());
         }
+    }
+
+    private IntPredicate valueGreaterThan(int elementIndex) {
+        return value -> comparator.compare(data.get(value), data.get(elementIndex)) > 0;
     }
 
     private int getChild(int elementIndex) {
         return (elementIndex + 1) * 2;
     }
 
-    private OptionalInt getGreatestChild(int leftChild, int rightChild) {
-        var parent = getParentOf(leftChild);
+    private OptionalInt findGreatestChildOf(int parent) {
+        var rightChild = getChild(parent);
+        var leftChild = rightChild - 1;
+
         if (leftChild <= data.size() - 1 && rightChild <= data.size() - 1) {
             if (comparator.compare(data.get(leftChild), data.get(rightChild)) > 0) {
                 return OptionalInt.of(leftChild);
