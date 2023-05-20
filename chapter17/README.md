@@ -36,3 +36,5 @@ C3["{*,l,n}"] -- n --> D7[ ]
 D6[ ] -- l --> E4[ * ]
 D7[ ] -- t --> E5[ * ]
 ```
+
+``R: tag, tan, tank, tap, today, total, we, well, went``
