@@ -38,3 +38,6 @@ D7[ ] -- t --> E5[ * ]
 ```
 
 ``R: tag, tan, tank, tap, today, total, we, well, went``
+
+2. Draw a trie that stores the following words: "get", "go", "got", "gotten", "hall", "ham", "
+   hammer", "hill" and "zebra"
