@@ -3,6 +3,7 @@ package trie;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Optional;
 
 public class BasicTrie {
 
@@ -16,25 +17,23 @@ public class BasicTrie {
     public BasicTrie(Collection<String> words) {
         this.root = new Node(null, new ArrayList<>());
         for (String word : words) {
-            addWordToTrie(word);
+            addWordToTrie(word.strip().toLowerCase());
         }
     }
 
     private void addWordToTrie(String word) {
         var currentNode = this.root;
-        for (Character c : word.strip().toLowerCase().toCharArray()) {
+        for (Character c : word.toCharArray()) {
             var childWithCharacter = currentNode.getChildWith(c);
-            if (childWithCharacter != null) {
-                currentNode = childWithCharacter;
+            if (childWithCharacter.isPresent()) {
+                currentNode = childWithCharacter.get();
             } else {
                 var newNode = new Node(c, new ArrayList<>());
                 currentNode.children.add(newNode);
                 currentNode = newNode;
             }
         }
-        if (currentNode != null) {
-            currentNode.setFinalWord();
-        }
+        currentNode.setFinalWord();
     }
 
 
@@ -42,8 +41,8 @@ public class BasicTrie {
         var currentNode = this.root;
         for (Character c : word.strip().toLowerCase().toCharArray()) {
             var childWithCharacter = currentNode.getChildWith(c);
-            if (childWithCharacter != null) {
-                currentNode = childWithCharacter;
+            if (childWithCharacter.isPresent()) {
+                currentNode = childWithCharacter.get();
             } else {
                 return false;
             }
@@ -68,21 +67,17 @@ public class BasicTrie {
             this.isFinalWord = false;
         }
 
-        public void setFinalWord() {
+        void setFinalWord() {
             this.isFinalWord = true;
         }
 
-        Node getChildWith(Character c) {
+        Optional<Node> getChildWith(Character c) {
             for (Node node : children) {
                 if (c.equals(node.character)) {
-                    return node;
+                    return Optional.of(node);
                 }
             }
-            return null;
-        }
-
-        boolean childrenNotContains(Character c) {
-            return getChildWith(c) == null;
+            return Optional.empty();
         }
     }
 
