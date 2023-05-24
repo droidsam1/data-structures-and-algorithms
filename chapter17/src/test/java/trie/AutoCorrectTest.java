@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class AutoCorrectTest {
@@ -33,7 +32,6 @@ class AutoCorrectTest {
     }
 
     @Test
-    @Disabled("while developing a trie")
     void shouldReturnTheCorrectWord() {
         var correctWords = List.of("cat");
         var input = "cax";

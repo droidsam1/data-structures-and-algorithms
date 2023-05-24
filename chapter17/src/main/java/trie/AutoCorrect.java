@@ -1,25 +1,20 @@
 package trie;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class AutoCorrect {
 
-    private final List<String> correctWords;
+    private final BasicTrie correctWords;
 
     public AutoCorrect() {
-        this.correctWords = new ArrayList<>();
+        this.correctWords = new BasicTrie();
     }
 
     public AutoCorrect(List<String> correctWords) {
-        this.correctWords = correctWords;
+        this.correctWords = new BasicTrie(correctWords);
     }
 
     public List<String> autocorrect(String input) {
-        if (correctWords.contains(input)) {
-            return List.of(input);
-        }
-        return Collections.emptyList();
+        return correctWords.getClosestWordsTo(input);
     }
 }
