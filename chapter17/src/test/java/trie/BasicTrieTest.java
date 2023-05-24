@@ -1,5 +1,6 @@
 package trie;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,6 +28,18 @@ class BasicTrieTest {
 
         assertTrue(inputWords.stream().allMatch(trie::contains));
         assertFalse(trie.contains("capo"));
+    }
+
+    @Test
+    void shouldReturnClosestMatchWhenWordIsCorrect() {
+        var correctWords = List.of("cat", "cap", "captain", "cop", "ace", "aerial", "catnip", "catnap");
+
+        var trie = new BasicTrie(correctWords);
+
+        var corrections = trie.getClosestWordsTo("catnit");
+
+        assertNotNull(corrections);
+        assertEquals("catnip", corrections.get(0));
     }
 
     @Test

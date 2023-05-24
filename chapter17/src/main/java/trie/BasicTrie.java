@@ -56,16 +56,16 @@ public class BasicTrie {
         var matchedPrefix = new StringBuilder();
         var currentNode = this.root;
         for (Character c : word.strip().toLowerCase().toCharArray()) {
-            if (currentNode.character != null) {
-                matchedPrefix.append(currentNode.character);
-            }
-            
             var childWithCharacter = currentNode.getChildWith(c);
             if (childWithCharacter.isPresent()) {
                 currentNode = childWithCharacter.get();
+                matchedPrefix.append(currentNode.character);
             } else {
                 return allWordsFrom(currentNode, matchedPrefix);
             }
+        }
+        if (currentNode.isFinalWord) {
+            return List.of(matchedPrefix.toString());
         }
         return allWordsFrom(currentNode, matchedPrefix);
     }
