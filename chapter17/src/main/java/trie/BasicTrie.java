@@ -3,6 +3,7 @@ package trie;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 public class BasicTrie {
@@ -48,6 +49,41 @@ public class BasicTrie {
             }
         }
         return currentNode.isFinalWord;
+    }
+
+
+    public List<String> getClosestWordsTo(String word) {
+        var matchedPrefix = new StringBuilder();
+        var currentNode = this.root;
+        for (Character c : word.strip().toLowerCase().toCharArray()) {
+            if (currentNode.character != null) {
+                matchedPrefix.append(currentNode.character);
+            }
+            
+            var childWithCharacter = currentNode.getChildWith(c);
+            if (childWithCharacter.isPresent()) {
+                currentNode = childWithCharacter.get();
+            } else {
+                return allWordsFrom(currentNode, matchedPrefix);
+            }
+        }
+        return allWordsFrom(currentNode, matchedPrefix);
+    }
+
+    private List<String> allWordsFrom(Node currentNode, StringBuilder matchedPrefix) {
+        var words = new ArrayList<String>();
+        var prefix = new StringBuilder(matchedPrefix.toString());
+        for (Node child : currentNode.children) {
+            prefix.append(child.character);
+            if (child.isFinalWord) {
+                words.add(prefix.toString());
+            }
+            if (child.children.isEmpty()) {
+                return words;
+            }
+            words.addAll(allWordsFrom(child, prefix));
+        }
+        return words;
     }
 
 

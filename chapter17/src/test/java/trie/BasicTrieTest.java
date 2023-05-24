@@ -21,12 +21,25 @@ class BasicTrieTest {
 
     @Test
     void shouldContainWords() {
-
         var inputWords = List.of("cat", "cap", "captain", "cop", "ace", "aerial", "catnip", "catnap");
 
         var trie = new BasicTrie(inputWords);
 
         assertTrue(inputWords.stream().allMatch(trie::contains));
         assertFalse(trie.contains("capo"));
+    }
+
+    @Test
+    void shouldReturnClosestMatchWhenMisspelledWords() {
+        var correctWords = List.of("cat", "cap", "captain", "cop", "ace", "aerial", "catnip", "catnap");
+        var misspelledWord = "catnit";
+        var expectedCorrection = "catnip";
+
+        var trie = new BasicTrie(correctWords);
+
+        var corrections = trie.getClosestWordsTo(misspelledWord);
+
+        assertNotNull(corrections);
+        assertTrue(corrections.contains(expectedCorrection));
     }
 }
