@@ -22,7 +22,7 @@ class BasicTrieTest {
     @Test
     void shouldContainWords() {
 
-        var inputWords = List.of("cat", "cap", "captain", "cop");
+        var inputWords = List.of("cat", "cap", "captain", "cop", "ace", "aerial", "catnip", "catnap");
 
         var trie = new BasicTrie(inputWords);
 

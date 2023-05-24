@@ -2,6 +2,7 @@ package trie;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class BasicTrie {
 
@@ -9,36 +10,33 @@ public class BasicTrie {
 
 
     public BasicTrie() {
-        this.root = new Node(null, new ArrayList<>());
+        this(Collections.emptyList());
     }
 
     public BasicTrie(Collection<String> words) {
-        this();
+        this.root = new Node(null, new ArrayList<>());
         for (String word : words) {
-            var currentNode = this.root;
-            for (Character c : word.strip().toLowerCase().toCharArray()) {
-                if (currentNode.equals(root)) {
-                    if (currentNode.childrenNotContains(c)) {
-                        var newNode = new Node(c, new ArrayList<>());
-                        currentNode.children.add(newNode);
-                        currentNode = newNode;
-                        continue;
-                    }
-                }
-                var childWithCharacter = currentNode.getChildWith(c);
-                if (childWithCharacter != null) {
-                    currentNode = childWithCharacter;
-                } else {
-                    var newNode = new Node(c, new ArrayList<>());
-                    currentNode.children.add(newNode);
-                    currentNode = newNode;
-                }
-            }
-            if (currentNode != null) {
-                currentNode.setFinalWord();
-            }
+            addWordToTrie(word);
         }
     }
+
+    private void addWordToTrie(String word) {
+        var currentNode = this.root;
+        for (Character c : word.strip().toLowerCase().toCharArray()) {
+            var childWithCharacter = currentNode.getChildWith(c);
+            if (childWithCharacter != null) {
+                currentNode = childWithCharacter;
+            } else {
+                var newNode = new Node(c, new ArrayList<>());
+                currentNode.children.add(newNode);
+                currentNode = newNode;
+            }
+        }
+        if (currentNode != null) {
+            currentNode.setFinalWord();
+        }
+    }
+
 
     public boolean contains(String word) {
         var currentNode = this.root;
