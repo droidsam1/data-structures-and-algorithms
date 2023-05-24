@@ -47,11 +47,7 @@ public class BasicTrie {
                 return false;
             }
         }
-
-        if (currentNode != null) {
-            return currentNode.isFinalWord;
-        }
-        return false;
+        return currentNode.isFinalWord;
     }
 
 
