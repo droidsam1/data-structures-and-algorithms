@@ -1,6 +1,7 @@
 package heap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayDeque;
@@ -49,6 +50,21 @@ class BasicMaxHeapTest {
     }
 
     @Test
+    void shouldReturnTrueWhenHeapIsEmpty() {
+        var heap = new BasicMaxHeap<>();
+
+        assertTrue(heap.isEmpty());
+    }
+
+    @Test
+    void shouldReturnFalseWhenHeapIsEmpty() {
+        var heap = new BasicMaxHeap<Integer>();
+        heap.add(1);
+
+        assertFalse(heap.isEmpty());
+    }
+
+    @Test
     void shouldTopElementAlwaysBeTheMax() {
         var heap = new BasicMaxHeap<Integer>();
         var inputList = List.of(55, 22, 34, 10, 2, 99);
@@ -64,14 +80,7 @@ class BasicMaxHeapTest {
     }
 
     @Test
-    void shouldReturnTrueWhenHeapIsEmpty() {
-        var heap = new BasicMaxHeap<>();
-
-        assertTrue(heap.isEmpty());
-    }
-
-    @Test
-    void shouldTheMaxElementBeAtTheTop() {
+    void shouldTopElementAlwaysBeTheMaxEvenForBigInputs() {
         var input = RandomUtils.generateRandomInput();
         var expectedOutputOrder = Arrays.stream(input)
                                         .sorted(Comparator.reverseOrder())
