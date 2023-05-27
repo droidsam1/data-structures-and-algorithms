@@ -75,6 +75,7 @@ C5[ ] -- b --> D7[ ]
 D7[ ] -- r --> E7[ ]
 E7[ ] -- a --> F7[ * ]
 ```
+3. Write a function that traverses each node of a trie and prints each key, including all "*" keys;
 
 4. Write an autocorrect function that attempts to replace a user's typo with a correct word. The
    function should accept a string that represents text a user type in. If the user's string is not

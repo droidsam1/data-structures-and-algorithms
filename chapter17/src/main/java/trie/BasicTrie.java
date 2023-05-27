@@ -3,7 +3,9 @@ package trie;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class BasicTrie {
@@ -29,8 +31,8 @@ public class BasicTrie {
                 currentNode = childWithCharacter.get();
             } else {
                 var isEndOfCompleteWord = (i == word.length() - 1);
-                var newNode = new Node(word.charAt(i), new ArrayList<>(), isEndOfCompleteWord);
-                currentNode.children.add(newNode);
+                var newNode = new Node(word.charAt(i), new HashMap<>(), isEndOfCompleteWord);
+                currentNode.children.put(word.charAt(i), newNode);
                 currentNode = newNode;
             }
         }
@@ -70,7 +72,7 @@ public class BasicTrie {
 
     private List<String> allWordsFrom(Node currentNode, String matchedPrefix) {
         var words = new ArrayList<String>();
-        for (Node child : currentNode.children) {
+        for (Node child : currentNode.children().values()) {
             var prefix = matchedPrefix + child.character;
             if (child.isEndOfCompleteWord) {
                 words.add(prefix);
@@ -81,19 +83,14 @@ public class BasicTrie {
     }
 
 
-    private record Node(Character character, Collection<Node> children, boolean isEndOfCompleteWord) {
+    private record Node(Character character, Map<Character, Node> children, boolean isEndOfCompleteWord) {
 
         static Node createRootNode() {
-            return new Node(null, new ArrayList<>(), false);
+            return new Node(null, new HashMap<>(), false);
         }
 
         Optional<Node> getChildWith(Character c) {
-            for (Node node : children) {
-                if (c.equals(node.character)) {
-                    return Optional.of(node);
-                }
-            }
-            return Optional.empty();
+            return Optional.ofNullable(children.get(c));
         }
     }
 
