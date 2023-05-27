@@ -24,23 +24,21 @@ public class BasicTrie {
     private void addWordToTrie(String word) {
         var currentNode = this.root;
         for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            var childWithCharacter = currentNode.getChildWith(c);
+            var childWithCharacter = currentNode.getChildWith(word.charAt(i));
             if (childWithCharacter.isPresent()) {
                 currentNode = childWithCharacter.get();
             } else {
-                var isEndOfCompleteWord = i == word.length() - 1;
-                var newNode = new Node(c, new ArrayList<>(), isEndOfCompleteWord);
+                var isEndOfCompleteWord = (i == word.length() - 1);
+                var newNode = new Node(word.charAt(i), new ArrayList<>(), isEndOfCompleteWord);
                 currentNode.children.add(newNode);
                 currentNode = newNode;
             }
         }
     }
 
-
     public boolean contains(String word) {
         var currentNode = this.root;
-        for (Character c : word.strip().toLowerCase().toCharArray()) {
+        for (char c : word.strip().toLowerCase().toCharArray()) {
             var childWithCharacter = currentNode.getChildWith(c);
             if (childWithCharacter.isPresent()) {
                 currentNode = childWithCharacter.get();
@@ -55,7 +53,7 @@ public class BasicTrie {
     public List<String> getClosestWordsTo(String word) {
         var matchedPrefix = new StringBuilder();
         var currentNode = this.root;
-        for (Character c : word.strip().toLowerCase().toCharArray()) {
+        for (char c : word.strip().toLowerCase().toCharArray()) {
             var childWithCharacter = currentNode.getChildWith(c);
             if (childWithCharacter.isPresent()) {
                 currentNode = childWithCharacter.get();
