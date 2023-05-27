@@ -70,14 +70,10 @@ public class BasicTrie {
 
     private List<String> allWordsFrom(Node currentNode, StringBuilder matchedPrefix) {
         var words = new ArrayList<String>();
-        var prefix = new StringBuilder(matchedPrefix.toString());
         for (Node child : currentNode.children) {
-            prefix.append(child.character);
+            var prefix = new StringBuilder(matchedPrefix.toString()).append(child.character);
             if (child.isEndOfCompleteWord) {
                 words.add(prefix.toString());
-            }
-            if (child.children.isEmpty()) {
-                return words;
             }
             words.addAll(allWordsFrom(child, prefix));
         }

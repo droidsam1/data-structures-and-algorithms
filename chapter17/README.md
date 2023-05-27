@@ -83,9 +83,9 @@ E7[ ] -- a --> F7[ * ]
    catnap", and "catnip". If the user accidentally types in "catnar", our function should return "
    catnap", since that's the word from the trie that shares the longest prefix with "catnar". This
    is because both "catnar" and "catnap" share a prefix of "catna" which is five characters long.
-   The word "catnip", isn't as sgood since it only shares the shorter, four-character prefix of "
+   The word "catnip", isn't as good since it only shares the shorter, four-character prefix of "
    catn" with "catnar"<br/> One more example: if the user types in "caxasfdij", the function could
    return any of the words "cat", "catnap" and "catnip", since they all share the same prefix of "
-   ca" with the user's typo<br/> If the user's string is found tin the trie, the function should
+   ca" with the user's typo<br/> If the user's string is found in the trie, the function should
    just return the word itself. This should be true even if the user's text is not a complete word,
    as we're only trying to correct typos, not suggest endings to the user's prefix.
