@@ -10,7 +10,6 @@ public class BasicTrie {
 
     private final Node root;
 
-
     public BasicTrie() {
         this(Collections.emptyList());
     }
@@ -24,17 +23,18 @@ public class BasicTrie {
 
     private void addWordToTrie(String word) {
         var currentNode = this.root;
-        for (Character c : word.toCharArray()) {
+        for (int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
             var childWithCharacter = currentNode.getChildWith(c);
             if (childWithCharacter.isPresent()) {
                 currentNode = childWithCharacter.get();
             } else {
-                var newNode = new Node(c, new ArrayList<>());
+                var isEndOfCompleteWord = i == word.length() - 1;
+                var newNode = new Node(c, new ArrayList<>(), isEndOfCompleteWord);
                 currentNode.children.add(newNode);
                 currentNode = newNode;
             }
         }
-        currentNode.setFinalWord();
     }
 
 
@@ -48,7 +48,7 @@ public class BasicTrie {
                 return false;
             }
         }
-        return currentNode.isFinalWord;
+        return currentNode.isEndOfCompleteWord;
     }
 
 
@@ -64,7 +64,7 @@ public class BasicTrie {
                 return allWordsFrom(currentNode, matchedPrefix);
             }
         }
-        if (currentNode.isFinalWord) {
+        if (currentNode.isEndOfCompleteWord) {
             return List.of(matchedPrefix.toString());
         }
         return allWordsFrom(currentNode, matchedPrefix);
@@ -75,7 +75,7 @@ public class BasicTrie {
         var prefix = new StringBuilder(matchedPrefix.toString());
         for (Node child : currentNode.children) {
             prefix.append(child.character);
-            if (child.isFinalWord) {
+            if (child.isEndOfCompleteWord) {
                 words.add(prefix.toString());
             }
             if (child.children.isEmpty()) {
@@ -91,16 +91,18 @@ public class BasicTrie {
 
         private final Character character;
         private final Collection<Node> children;
-        private boolean isFinalWord;
+        private final boolean isEndOfCompleteWord;
 
         Node(Character character, Collection<Node> children) {
             this.character = character;
             this.children = children;
-            this.isFinalWord = false;
+            this.isEndOfCompleteWord = false;
         }
 
-        void setFinalWord() {
-            this.isFinalWord = true;
+        Node(Character character, Collection<Node> children, boolean isEndOfCompleteWord) {
+            this.character = character;
+            this.children = children;
+            this.isEndOfCompleteWord = isEndOfCompleteWord;
         }
 
         Optional<Node> getChildWith(Character c) {
