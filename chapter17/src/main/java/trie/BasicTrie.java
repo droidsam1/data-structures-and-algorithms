@@ -15,7 +15,7 @@ public class BasicTrie {
     }
 
     public BasicTrie(Collection<String> words) {
-        this.root = new Node(null, new ArrayList<>());
+        this.root = Node.createRootNode();
         for (String word : words) {
             addWordToTrie(word.strip().toLowerCase());
         }
@@ -87,22 +87,10 @@ public class BasicTrie {
     }
 
 
-    private static class Node {
+    private record Node(Character character, Collection<Node> children, boolean isEndOfCompleteWord) {
 
-        private final Character character;
-        private final Collection<Node> children;
-        private final boolean isEndOfCompleteWord;
-
-        Node(Character character, Collection<Node> children) {
-            this.character = character;
-            this.children = children;
-            this.isEndOfCompleteWord = false;
-        }
-
-        Node(Character character, Collection<Node> children, boolean isEndOfCompleteWord) {
-            this.character = character;
-            this.children = children;
-            this.isEndOfCompleteWord = isEndOfCompleteWord;
+        static Node createRootNode() {
+            return new Node(null, new ArrayList<>(), false);
         }
 
         Optional<Node> getChildWith(Character c) {
