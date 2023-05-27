@@ -31,7 +31,7 @@ public class BasicTrie {
                 currentNode = childWithCharacter.get();
             } else {
                 var isEndOfCompleteWord = (i == word.length() - 1);
-                var newNode = new Node(word.charAt(i), new HashMap<>(), isEndOfCompleteWord);
+                var newNode = Node.create(word.charAt(i), isEndOfCompleteWord);
                 currentNode.children.put(word.charAt(i), newNode);
                 currentNode = newNode;
             }
@@ -84,6 +84,10 @@ public class BasicTrie {
 
 
     private record Node(Character character, Map<Character, Node> children, boolean isEndOfCompleteWord) {
+
+        static Node create(Character character, boolean isEndOfCompleteWord) {
+            return new Node(character, new HashMap<>(), isEndOfCompleteWord);
+        }
 
         static Node createRootNode() {
             return new Node(null, new HashMap<>(), false);
