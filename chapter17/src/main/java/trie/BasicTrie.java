@@ -59,21 +59,21 @@ public class BasicTrie {
                 currentNode = childWithCharacter.get();
                 matchedPrefix.append(currentNode.character);
             } else {
-                return allWordsFrom(currentNode, matchedPrefix);
+                return allWordsFrom(currentNode, matchedPrefix.toString());
             }
         }
         if (currentNode.isEndOfCompleteWord) {
             return List.of(matchedPrefix.toString());
         }
-        return allWordsFrom(currentNode, matchedPrefix);
+        return allWordsFrom(currentNode, matchedPrefix.toString());
     }
 
-    private List<String> allWordsFrom(Node currentNode, StringBuilder matchedPrefix) {
+    private List<String> allWordsFrom(Node currentNode, String matchedPrefix) {
         var words = new ArrayList<String>();
         for (Node child : currentNode.children) {
-            var prefix = new StringBuilder(matchedPrefix.toString()).append(child.character);
+            var prefix = matchedPrefix + child.character;
             if (child.isEndOfCompleteWord) {
-                words.add(prefix.toString());
+                words.add(prefix);
             }
             words.addAll(allWordsFrom(child, prefix));
         }
