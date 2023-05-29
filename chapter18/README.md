@@ -10,7 +10,9 @@ solutions to these exercises are found in the section, Chapter 18, on page 461.
    similar" products the site will recommend to the user when browsing a particular item. <br/> If
    the user is browsing "nails", what other products will be recommended to the user?
 
-Graph on page 385 looks similar to:
+```R: The recomended items would be: pins, needles, nail polish, hammer```
+
+_Graph on page 385 looks similar to:_
 
 ````mermaid
 flowchart TD;
