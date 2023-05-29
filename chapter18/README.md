@@ -16,6 +16,10 @@ solutions to these exercises are found in the section, Chapter 18, on page 461.
    what is the order in which we'll traverse all the vertices? Assume that when given the choice to
    visit multiple adjacent vertices, we'll first visit the node that is earliest in the alphabet
    ``R: A-B-E-J-F-O-C-G-K-D-H-L-M-I-N-P``
+3. If we perform breadth-first search on the previous graph starting with the "A" vertex, what is
+   the order in which we'll traverse all the vertices? Assume that when given the choice to visit
+   multiple adjacent vertices, we'll first visit the node that is earliest in the alphabet.
+   ``R: ABCDEFGHIJKLMNOP``
 
 _Graph on page 385 looks similar to:_
 
