@@ -16,4 +16,8 @@ public class Graph<T> {
     public void add(Vertex<T> aVertex) {
         adjacentsList.putIfAbsent(aVertex, new ArrayList<>());
     }
+
+    public boolean isEmpty() {
+        return this.adjacentsList.isEmpty();
+    }
 }
