@@ -8,12 +8,14 @@ class GraphTest {
 
 
     @Test
-    void shouldCreateAGraph() {
+    void shouldVertexCanBeAddedToAGraph() {
 
-        var aGraph = new Graph();
+        var aGraph = new Graph<String>();
+        var aVertex = new Vertex<>("A label");
+
+        aGraph.add(aVertex);
 
         assertNotNull(aGraph);
-
     }
 
 }
