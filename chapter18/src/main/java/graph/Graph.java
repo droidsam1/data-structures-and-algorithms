@@ -7,17 +7,21 @@ import java.util.Map;
 
 public class Graph<T> {
 
-    private final Map<Vertex<T>, List<Vertex<T>>> adjacentsList;
+    private final Map<Vertex<T>, List<Vertex<T>>> adjacentList;
 
     public Graph() {
-        adjacentsList = new HashMap<>();
+        adjacentList = new HashMap<>();
     }
 
     public void add(Vertex<T> aVertex) {
-        adjacentsList.putIfAbsent(aVertex, new ArrayList<>());
+        adjacentList.putIfAbsent(aVertex, new ArrayList<>());
     }
 
     public boolean isEmpty() {
-        return this.adjacentsList.isEmpty();
+        return this.adjacentList.isEmpty();
+    }
+
+    public boolean contains(Vertex<T> aVertex) {
+        return this.adjacentList.containsKey(aVertex);
     }
 }

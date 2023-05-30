@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 
 class GraphTest {
 
-
     @Test
     void shouldVertexCanBeAddedToAGraph() {
-
         var aGraph = new Graph<String>();
         var aVertex = new Vertex<>("A label");
 
@@ -23,6 +21,15 @@ class GraphTest {
     void canBeEmpty() {
         var aGraph = new Graph<String>();
         assertTrue(aGraph.isEmpty());
+    }
+
+    @Test
+    void canContainVertex() {
+        var aGraph = new Graph<String>();
+        var aVertex = new Vertex<>("A label");
+        aGraph.add(aVertex);
+
+        assertTrue(aGraph.contains(aVertex));
     }
 
 }
