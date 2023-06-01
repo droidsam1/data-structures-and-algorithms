@@ -100,7 +100,7 @@ class GraphTest {
     void breadFirstSearchShouldBehaveAsExample() {
         var aGraph = buildGraphFromExerciseThree();
 
-        aGraph.traverseBfs();
+        aGraph.traverseBfsAndPerform(vertex -> System.out.printf("%s", vertex.value()));
 
         assertEquals("abcdefghijklmnop", outContent.toString());
     }

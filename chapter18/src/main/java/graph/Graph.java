@@ -8,11 +8,14 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Graph<T> {
 
     private final Vertex<T> noConcreteValue = Vertex.createVertex(null);
+    private final Consumer<Vertex<T>> noOperation = (v) -> {
+    };
     private final Set<Vertex<T>> vertexMap;
 
     public Graph() {
@@ -33,13 +36,19 @@ public class Graph<T> {
             if (aVertex.value().equals(searchedVertex.value())) {
                 return true;
             } else {
-                foundedVertex = breadSearchFirst(searchedVertex, aVertex);
+                foundedVertex = breadSearchFirst(searchedVertex, aVertex, noOperation);
             }
         }
         return foundedVertex.isPresent();
     }
 
-    private Optional<Vertex<T>> breadSearchFirst(Vertex<T> searchedVertex, Vertex<T> fromVertex) {
+    private void breadSearchFirst(Consumer<Vertex<T>> operatorToPerformOnEveryVertex) {
+        this.breadSearchFirst(noConcreteValue, vertexMap.iterator().next(), operatorToPerformOnEveryVertex);
+    }
+
+    private Optional<Vertex<T>> breadSearchFirst(
+            Vertex<T> searchedVertex, Vertex<T> fromVertex, Consumer<Vertex<T>> operatorToPerformOnEveryVertex
+    ) {
         Set<Vertex<T>> visitedVertex = new HashSet<>();
         Deque<Vertex<T>> neighbourhoodStack = new ArrayDeque<>();
         neighbourhoodStack.add(fromVertex);
@@ -48,7 +57,9 @@ public class Graph<T> {
             if (visitedVertex.contains(adjacent)) {
                 continue;
             }
-            System.out.printf("%s", adjacent.value());
+
+            operatorToPerformOnEveryVertex.accept(adjacent);
+
             if (adjacent.value().equals(searchedVertex.value())) {
                 return Optional.of(adjacent);
             }
@@ -60,7 +71,7 @@ public class Graph<T> {
         return Optional.empty();
     }
 
-    public void traverseBfs() {
-        breadSearchFirst(noConcreteValue, vertexMap.iterator().next());
+    public void traverseBfsAndPerform(Consumer<Vertex<T>> consumer) {
+        breadSearchFirst(consumer);
     }
 }
