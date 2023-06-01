@@ -9,6 +9,10 @@ public record Vertex<T>(T value, ArrayList<Vertex<T>> adjacentList) {
         this(value, new ArrayList<>());
     }
 
+    public static <T> Vertex<T> createVertex(T value) {
+        return new Vertex<>(value);
+    }
+
     public Vertex<T> connectWith(Vertex<T> newAdjacent) {
         adjacentList.add(newAdjacent);
         return this;

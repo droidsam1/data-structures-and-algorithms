@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class Graph<T> {
 
+    private final Vertex<T> noConcreteValue = Vertex.createVertex(null);
     private final Set<Vertex<T>> vertexMap;
 
     public Graph() {
@@ -44,6 +45,10 @@ public class Graph<T> {
         neighbourhoodStack.add(fromVertex);
         while (!neighbourhoodStack.isEmpty()) {
             var adjacent = neighbourhoodStack.pop();
+            if (visitedVertex.contains(adjacent)) {
+                continue;
+            }
+            System.out.printf("%s", adjacent.value());
             if (adjacent.value().equals(searchedVertex.value())) {
                 return Optional.of(adjacent);
             }
@@ -55,4 +60,7 @@ public class Graph<T> {
         return Optional.empty();
     }
 
+    public void traverseBfs() {
+        breadSearchFirst(noConcreteValue, vertexMap.iterator().next());
+    }
 }
