@@ -8,8 +8,9 @@ public record Vertex<T>(T value, ArrayList<Vertex<T>> adjacentList) {
         this(value, new ArrayList<>());
     }
 
-    public void connectWith(Vertex<T> newAdjacent) {
+    public Vertex<T> connectWith(Vertex<T> newAdjacent) {
         adjacentList.add(newAdjacent);
+        return this;
     }
 
 }

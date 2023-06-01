@@ -45,4 +45,21 @@ class GraphTest {
         assertTrue(aGraph.contains(anotherVertex));
     }
 
+    @Test
+    void canSearchForDeeperConnections() {
+        var aGraph = new Graph<String>();
+        var drill = new Vertex<>("drill");
+        var hammer = new Vertex<>("hammer");
+        var saw = new Vertex<>("saw");
+        var knife = new Vertex<>("knife");
+        var fork = new Vertex<>("fork");
+        drill.connectWith(hammer.connectWith(saw.connectWith(knife.connectWith(fork))));
+
+        aGraph.add(drill);
+
+        assertTrue(aGraph.contains(drill));
+        assertTrue(aGraph.contains(saw));
+        assertTrue(aGraph.contains(fork));
+    }
+
 }
