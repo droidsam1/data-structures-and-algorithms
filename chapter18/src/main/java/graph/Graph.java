@@ -31,15 +31,7 @@ public class Graph<T> {
     }
 
     public boolean contains(Vertex<T> searchedVertex) {
-        Optional<Vertex<T>> foundedVertex = Optional.empty();
-        for (Vertex<T> aVertex : vertexMap) {
-            if (aVertex.value().equals(searchedVertex.value())) {
-                return true;
-            } else {
-                foundedVertex = breadSearchFirst(searchedVertex, aVertex, noOperation);
-            }
-        }
-        return foundedVertex.isPresent();
+        return breadSearchFirst(searchedVertex, vertexMap.iterator().next(), noOperation).isPresent();
     }
 
     private void breadSearchFirst(Consumer<Vertex<T>> operatorToPerformOnEveryVertex) {
