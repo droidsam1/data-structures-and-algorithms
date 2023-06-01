@@ -22,7 +22,7 @@ solutions to these exercises are found in the section, Chapter 18, on page 461.
    ``R: ABCDEFGHIJKLMNOP``
 4. In this chapter, I only provided the code for breadth-first traversal, as discussed in
    Breadth-First Search, on page 348. Hat is , the code simply printed the value of each vertex.
-   Modify the code so that i performs and actual search for a vertex value provided to the
+   Modify the code so that it performs and actual search for a vertex value provided to the
    function. (we did this for depth-first search) That is, if the function finds the vertex it's
    searching for, it should return that vertex's value. Otherwise, it should return null
 

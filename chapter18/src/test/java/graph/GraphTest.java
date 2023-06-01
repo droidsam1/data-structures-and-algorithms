@@ -32,4 +32,17 @@ class GraphTest {
         assertTrue(aGraph.contains(aVertex));
     }
 
+    @Test
+    void canConnectVertex() {
+        var aGraph = new Graph<String>();
+        var aVertex = new Vertex<>("A label");
+        var anotherVertex = new Vertex<>("A different label");
+        aVertex.connectWith(anotherVertex);
+
+        aGraph.add(aVertex);
+
+        assertTrue(aGraph.contains(aVertex));
+        assertTrue(aGraph.contains(anotherVertex));
+    }
+
 }
