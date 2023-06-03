@@ -11,9 +11,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 
 public class DijkstraShortestPath<T> {
+
 
     private final Vertex<T> from;
     private final Map<Vertex<T>, PathVertex<T>> pathMap;
@@ -53,7 +55,7 @@ public class DijkstraShortestPath<T> {
             if (visitedVertex.contains(current)) {
                 continue;
             }
-            var distanceFromOrigin = pathMap.getOrDefault(current, new PathVertex<>(null, 0)).distance;
+            var distanceFromOrigin = Optional.ofNullable(pathMap.get(current)).map(PathVertex::distance).orElse(0);
             processVertex(current, visitedVertex, distanceFromOrigin);
             if (neighbourhoodStack.isEmpty()) {
                 neighbourhoodStack.addAll(current.adjacents().keySet().stream().filter(not(current::equals)).toList());

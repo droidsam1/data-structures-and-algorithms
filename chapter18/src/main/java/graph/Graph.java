@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Graph<T> {
@@ -91,7 +92,11 @@ public class Graph<T> {
     }
 
     public GraphPath<T> findShortestPathBetween(T aVertex, T anotherVertex) {
-        return searchWithBfs(aVertex).map(shortestPath(anotherVertex)).orElse(null);
+        return searchWithBfs(aVertex).map(shortestPath(anotherVertex)).orElseThrow(originVertexNotFound());
+    }
+
+    private Supplier<IllegalArgumentException> originVertexNotFound() {
+        return () -> new IllegalArgumentException("Origin vertex is not present in the graph");
     }
 
     private Function<Vertex<T>, GraphPath<T>> shortestPath(T anotherVertex) {
