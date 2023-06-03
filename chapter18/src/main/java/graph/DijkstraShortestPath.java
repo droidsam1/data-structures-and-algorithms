@@ -47,16 +47,18 @@ public class DijkstraShortestPath<T> {
         Set<Vertex<T>> visitedVertex = new HashSet<>();
         Deque<Vertex<T>> neighbourhoodStack = new ArrayDeque<>();
         neighbourhoodStack.add(from);
-        var distance = 1;
+        var distanceFromOrigin = 1;
         while (!neighbourhoodStack.isEmpty()) {
             var current = neighbourhoodStack.pop();
             if (visitedVertex.contains(current)) {
                 continue;
             }
-            processVertex(current, visitedVertex, distance++);
+            processVertex(current, visitedVertex, distanceFromOrigin);
             if (neighbourhoodStack.isEmpty()) {
                 neighbourhoodStack.addAll(current.adjacentList().stream().filter(not(current::equals)).toList());
+                distanceFromOrigin++;
             }
+
         }
     }
 
