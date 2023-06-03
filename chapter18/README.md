@@ -26,6 +26,23 @@ solutions to these exercises are found in the section, Chapter 18, on page 461.
    function. (we did this for depth-first search) That is, if the function finds the vertex it's
    searching for, it should return that vertex's value. Otherwise, it should return null
 
+5. In Dijkstra's Algorithm, on page 367, we saw how Dijkstra's algorithm helped us find the shortest
+   path within a weighted graph. However, the concept of a shortest path exists within an unweighted
+   graph as well.<br/> How?<br/> The shortest path in a classic (unweighted) graph is the path that
+   takes the fewest number of vertices to get from one vertex to another<br/> This can be especially
+   useful in social networking applications. <br/><br/>Take the example that follows:
+   ![](/blob/exercise5_graph.jpg)
+   <br/>
+   If we want to know how Idris is to connected Lina, we'd see that she's connected to her from two
+   different directions. Tha is, Idris is a second-degree connection to Lina through Kamil, but she
+   is also a fifth-degree connection through Talia. Now, we're probably interested in how closely
+   Idris is connected to Lina, so the fact they're also second degree connections.
+   Write a function that accepts two vertices from a graph and returns the shortest path between
+   them. The function should return an array containing the precise path, such
+   as ["Idris","Kamil","Lina"].<br/><br/> _Hint_:The algorithm may contain elements of both
+   breadth-first
+   search and Dijkstra's algorithm
+
 _Graph on page 385 looks similar to:_
 
 ````mermaid
