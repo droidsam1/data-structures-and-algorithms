@@ -32,13 +32,18 @@ public class Graph<T> {
     }
 
     public boolean contains(T searchedVertex) {
-        return breadthSearchFirst(searchedVertex, vertexSet.iterator().next(), v -> {
-        }).isPresent();
+        return searchWithBfs(searchedVertex).isPresent();
     }
 
     private Optional<Vertex<T>> searchWithBfs(T searchedVertex) {
-        return this.breadthSearchFirst(searchedVertex, vertexSet.iterator().next(), v -> {
-        });
+        for (Vertex<T> tVertex : vertexSet) {
+            var foundIt = this.breadthSearchFirst(searchedVertex, tVertex, v -> {
+            });
+            if (foundIt.isPresent()) {
+                return foundIt;
+            }
+        }
+        return Optional.empty();
     }
 
     private Optional<Vertex<T>> breadthSearchFirst(
@@ -68,14 +73,14 @@ public class Graph<T> {
     }
 
     public void traverseBfsAndPerform(Consumer<T> consumer) {
-        this.breadthSearchFirst(null, vertexSet.iterator().next(), consumer);
+        vertexSet.forEach(vertex -> this.breadthSearchFirst(null, vertex, consumer));
     }
 
     public void traverseDfsAndPerform(Consumer<T> vertexConsumer) {
-        this.traverseDfsAndPerform(vertexConsumer, vertexSet.iterator().next(), new HashSet<>());
+        vertexSet.forEach(vertex -> this.traverseDfsAndPerform(vertex, new HashSet<>(), vertexConsumer));
     }
 
-    public void traverseDfsAndPerform(Consumer<T> consumer, Vertex<T> vertex, Set<Vertex<T>> alreadyVisited) {
+    public void traverseDfsAndPerform(Vertex<T> vertex, Set<Vertex<T>> alreadyVisited, Consumer<T> consumer) {
         if (alreadyVisited.contains(vertex)) {
             return;
         }
@@ -87,7 +92,7 @@ public class Graph<T> {
                                    .sorted(Comparator.comparing(o -> o.value().toString()))
                                    .toList();
         for (Vertex<T> adjacent : pendingToVisit) {
-            traverseDfsAndPerform(consumer, adjacent, alreadyVisited);
+            traverseDfsAndPerform(adjacent, alreadyVisited, consumer);
         }
     }
 

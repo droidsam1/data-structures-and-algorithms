@@ -1,6 +1,7 @@
 package graph;
 
 import static fixture.GraphFixture.aFriendshipGraphFromExerciseFive;
+import static fixture.GraphFixture.buildFlightMapFragmented;
 import static fixture.GraphFixture.buildFlightMapFromPage376;
 import static fixture.GraphFixture.buildGraphFromExerciseOne;
 import static fixture.GraphFixture.buildGraphFromExerciseThree;
@@ -141,6 +142,18 @@ class GraphTest {
         var shortestPath = aFlightRouteMap.findShortestPathBetween("Atlanta", "Chicago");
 
         assertEquals(200, shortestPath.distance());
+    }
+
+    @Test
+    void canFindTheShortestFromNoFullyConnectedGraphs() {
+        var aFlightRouteMap = buildFlightMapFragmented();
+
+        var shortestPathAmericanSide = aFlightRouteMap.findShortestPathBetween("Atlanta", "Chicago");
+        var shortestPathEuropeSide = aFlightRouteMap.findShortestPathBetween("Spain", "Germany");
+
+        assertEquals(200, shortestPathAmericanSide.distance());
+        assertEquals(180, shortestPathEuropeSide.distance());
+
     }
 
 }

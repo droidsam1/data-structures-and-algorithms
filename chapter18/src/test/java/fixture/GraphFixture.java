@@ -158,7 +158,19 @@ public class GraphFixture {
 
         aGraph.add(atlanta);
 
+        return aGraph;
+    }
 
+    public static Graph<String> buildFlightMapFragmented() {
+        var aGraph = buildFlightMapFromPage376();
+        var spain = createVertex("Spain");
+        var france = createVertex("France");
+        var germany = createVertex("Germany");
+
+        spain.connectWith(france, 100);
+        france.connectWith(germany, 80);
+
+        aGraph.add(spain);
         return aGraph;
     }
 }
