@@ -3,6 +3,7 @@ package fixture;
 import static graph.Vertex.createVertex;
 
 import graph.Graph;
+import graph.Vertex;
 
 public class GraphFixture {
 
@@ -68,6 +69,44 @@ public class GraphFixture {
         i.connectWith(d);
 
         aGraph.add(a);
+        return aGraph;
+    }
+
+
+    public static Graph<String> aFriendshipGraphFromExerciseFive() {
+        var aGraph = new Graph<String>();
+
+        var idris = Vertex.createVertex("Idris");
+        var kamil = Vertex.createVertex("Kamil");
+        var talia = Vertex.createVertex("Talia");
+        var lina = Vertex.createVertex("Lina");
+        var ken = Vertex.createVertex("Ken");
+        var marco = Vertex.createVertex("Marco");
+        var sasha = Vertex.createVertex("Sasha");
+
+        idris.connectWith(kamil);
+        idris.connectWith(talia);
+
+        kamil.connectWith(idris);
+        kamil.connectWith(lina);
+
+        lina.connectWith(kamil);
+        lina.connectWith(sasha);
+
+        talia.connectWith(idris);
+        talia.connectWith(ken);
+
+        ken.connectWith(talia);
+        ken.connectWith(marco);
+
+        marco.connectWith(ken);
+        marco.connectWith(sasha);
+
+        sasha.connectWith(marco);
+        sasha.connectWith(lina);
+
+        aGraph.add(idris);
+
         return aGraph;
     }
 }

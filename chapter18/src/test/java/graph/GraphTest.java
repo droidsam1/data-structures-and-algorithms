@@ -1,5 +1,6 @@
 package graph;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -113,6 +114,19 @@ class GraphTest {
         aGraph.traverseDfsAndPerform(vertex -> System.out.printf("%s", vertex.value()));
 
         assertEquals("abejfocgkdhlminp", outContent.toString());
+    }
+
+    @Test
+    void canFindTheShortestPath() {
+        var aFriendShipGraph = GraphFixture.aFriendshipGraphFromExerciseFive();
+
+        var shortestPath = aFriendShipGraph.findShortestPathBetween(
+                Vertex.createVertex("Idris"),
+                Vertex.createVertex("Lina")
+        );
+
+        assertEquals(2, shortestPath.distance());
+        assertArrayEquals(new String[]{"Idris", "Kamil", "Lina"}, shortestPath.path().toArray());
     }
 
 }
