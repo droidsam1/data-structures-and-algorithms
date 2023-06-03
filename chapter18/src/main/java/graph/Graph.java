@@ -105,7 +105,7 @@ public class Graph<T> {
     }
 
     private Function<Vertex<T>, GraphPath<T>> shortestPath(T anotherVertex) {
-        return vertex -> DijkstraShortestPath.from(vertex).to(Vertex.createVertex(anotherVertex));
+        return vertex -> ShortestPathDijkstra.from(vertex).to(Vertex.createVertex(anotherVertex));
     }
 }
 

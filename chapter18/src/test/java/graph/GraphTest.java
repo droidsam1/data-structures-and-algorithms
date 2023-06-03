@@ -124,6 +124,15 @@ class GraphTest {
         assertEquals(2, shortestPath.distance());
         assertArrayEquals(new String[]{"Ken", "Marco", "Sasha"}, shortestPath.path().toArray());
     }
+    @Test
+    void canFindTheShortestPathFromArbitraryVertexAnotherExample() {
+        var aFriendShipGraph = aFriendshipGraphFromExerciseFive();
+
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Idris", "Sasha");
+
+        assertEquals(3, shortestPath.distance());
+        assertArrayEquals(new String[]{"Idris", "Kamil", "Lina", "Sasha"}, shortestPath.path().toArray());
+    }
 
 
     @Test
