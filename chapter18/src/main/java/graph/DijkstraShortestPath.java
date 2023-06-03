@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 public class DijkstraShortestPath<T> {
@@ -55,7 +56,11 @@ public class DijkstraShortestPath<T> {
             }
             processVertex(current, visitedVertex, distanceFromOrigin);
             if (neighbourhoodStack.isEmpty()) {
-                neighbourhoodStack.addAll(current.adjacentList().stream().filter(not(current::equals)).toList());
+                neighbourhoodStack.addAll(current.adjacents()
+                                                 .keySet()
+                                                 .stream()
+                                                 .filter(not(current::equals))
+                                                 .toList());
                 distanceFromOrigin++;
             }
 
@@ -66,11 +71,11 @@ public class DijkstraShortestPath<T> {
         visitedVertex.add(current);
         pathMap.putIfAbsent(current, new PathVertex<>(current, 0));
 
-        var neighbourhood = current.adjacentList();
-        for (Vertex<T> tVertex : neighbourhood) {
-            pathMap.putIfAbsent(tVertex, new PathVertex<>(current, accumulatedDistance));
-            if (pathMap.get(tVertex).distance > accumulatedDistance) {
-                pathMap.put(tVertex, new PathVertex<>(current, accumulatedDistance));
+        var neighbourhood = current.adjacents();
+        for (Entry<Vertex<T>, Integer> tVertex : neighbourhood.entrySet()) {
+            pathMap.putIfAbsent(tVertex.getKey(), new PathVertex<>(current, accumulatedDistance));
+            if (pathMap.get(tVertex.getKey()).distance > accumulatedDistance) {
+                pathMap.put(tVertex.getKey(), new PathVertex<>(current, accumulatedDistance));
             }
         }
 

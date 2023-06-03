@@ -53,7 +53,8 @@ public class Graph<T> {
             if (adjacent.value().equals(searchedVertex)) {
                 return Optional.of(adjacent);
             }
-            var visited = adjacent.adjacentList()
+            var visited = adjacent.adjacents()
+                                  .keySet()
                                   .stream()
                                   .filter(not(neighbourhoodStack::contains))
                                   .collect(Collectors.partitioningBy(visitedVertex::contains));
@@ -79,7 +80,8 @@ public class Graph<T> {
         }
         alreadyVisited.add(vertex);
         consumer.accept(vertex.value());
-        var pendingToVisit = vertex.adjacentList()
+        var pendingToVisit = vertex.adjacents()
+                                   .keySet()
                                    .stream()
                                    .sorted(Comparator.comparing(o -> o.value().toString()))
                                    .toList();

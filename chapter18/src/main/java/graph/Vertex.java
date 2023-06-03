@@ -1,12 +1,13 @@
 package graph;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-public record Vertex<T>(T value, ArrayList<Vertex<T>> adjacentList) {
+public record Vertex<T>(T value, Map<Vertex<T>, Integer> adjacents) {
 
     public Vertex(T value) {
-        this(value, new ArrayList<>());
+        this(value, new HashMap<>());
     }
 
     public static <T> Vertex<T> createVertex(T value) {
@@ -14,7 +15,11 @@ public record Vertex<T>(T value, ArrayList<Vertex<T>> adjacentList) {
     }
 
     public Vertex<T> connectWith(Vertex<T> newAdjacent) {
-        adjacentList.add(newAdjacent);
+        return connectWith(newAdjacent, 1);
+    }
+
+    public Vertex<T> connectWith(Vertex<T> newAdjacent, int weight) {
+        adjacents.put(newAdjacent, weight);
         return this;
     }
 
