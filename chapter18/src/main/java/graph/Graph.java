@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 public class Graph<T> {
 
-    private final Vertex<T> noConcreteValue = Vertex.createVertex(null);
     private final Set<Vertex<T>> vertexSet;
 
     public Graph() {
@@ -31,18 +30,18 @@ public class Graph<T> {
         return vertexSet.isEmpty();
     }
 
-    public boolean contains(Vertex<T> searchedVertex) {
+    public boolean contains(T searchedVertex) {
         return breadthSearchFirst(searchedVertex, vertexSet.iterator().next(), v -> {
         }).isPresent();
     }
 
-    private Optional<Vertex<T>> searchWithBfs(Vertex<T> searchedVertex) {
+    private Optional<Vertex<T>> searchWithBfs(T searchedVertex) {
         return this.breadthSearchFirst(searchedVertex, vertexSet.iterator().next(), v -> {
         });
     }
 
     private Optional<Vertex<T>> breadthSearchFirst(
-            Vertex<T> searchedVertex, Vertex<T> fromVertex, Consumer<Vertex<T>> vertexConsumer
+            T searchedVertex, Vertex<T> fromVertex, Consumer<Vertex<T>> vertexConsumer
     ) {
         Set<Vertex<T>> visitedVertex = new HashSet<>();
         Deque<Vertex<T>> neighbourhoodStack = new ArrayDeque<>();
@@ -51,7 +50,7 @@ public class Graph<T> {
             var adjacent = neighbourhoodStack.pop();
             vertexConsumer.accept(adjacent);
 
-            if (adjacent.value().equals(searchedVertex.value())) {
+            if (adjacent.value().equals(searchedVertex)) {
                 return Optional.of(adjacent);
             }
             var visited = adjacent.adjacentList()
@@ -67,7 +66,7 @@ public class Graph<T> {
     }
 
     public void traverseBfsAndPerform(Consumer<Vertex<T>> consumer) {
-        this.breadthSearchFirst(noConcreteValue, vertexSet.iterator().next(), consumer);
+        this.breadthSearchFirst(null, vertexSet.iterator().next(), consumer);
     }
 
     public void traverseDfsAndPerform(Consumer<Vertex<T>> vertexConsumer) {
@@ -89,12 +88,12 @@ public class Graph<T> {
         }
     }
 
-    public GraphPath<T> findShortestPathBetween(Vertex<T> aVertex, Vertex<T> anotherVertex) {
+    public GraphPath<T> findShortestPathBetween(T aVertex, T anotherVertex) {
         return searchWithBfs(aVertex).map(shortestPath(anotherVertex)).orElse(null);
     }
 
-    private Function<Vertex<T>, GraphPath<T>> shortestPath(Vertex<T> anotherVertex) {
-        return vertex -> DijkstraShortestPath.from(vertex).to(anotherVertex);
+    private Function<Vertex<T>, GraphPath<T>> shortestPath(T anotherVertex) {
+        return vertex -> DijkstraShortestPath.from(vertex).to(Vertex.createVertex(anotherVertex));
     }
 }
 

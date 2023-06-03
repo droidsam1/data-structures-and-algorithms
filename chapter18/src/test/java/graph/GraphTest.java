@@ -1,6 +1,5 @@
 package graph;
 
-import static graph.Vertex.createVertex;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -50,7 +49,7 @@ class GraphTest {
         var aVertex = new Vertex<>("A label");
         aGraph.add(aVertex);
 
-        assertTrue(aGraph.contains(aVertex));
+        assertTrue(aGraph.contains("A label"));
     }
 
     @Test
@@ -62,8 +61,8 @@ class GraphTest {
 
         aGraph.add(aVertex);
 
-        assertTrue(aGraph.contains(aVertex));
-        assertTrue(aGraph.contains(anotherVertex));
+        assertTrue(aGraph.contains("A label"));
+        assertTrue(aGraph.contains("A different label"));
     }
 
     @Test
@@ -78,9 +77,9 @@ class GraphTest {
 
         aGraph.add(drill);
 
-        assertTrue(aGraph.contains(drill));
-        assertTrue(aGraph.contains(saw));
-        assertTrue(aGraph.contains(fork));
+        assertTrue(aGraph.contains("drill"));
+        assertTrue(aGraph.contains("saw"));
+        assertTrue(aGraph.contains("fork"));
     }
 
     @Test
@@ -95,7 +94,7 @@ class GraphTest {
 
         aGraph.add(drill);
 
-        assertTrue(aGraph.contains(fork));
+        assertTrue(aGraph.contains("fork"));
     }
 
     @Test
@@ -121,7 +120,7 @@ class GraphTest {
     void canFindTheShortestPath() {
         var aFriendShipGraph = GraphFixture.aFriendshipGraphFromExerciseFive();
 
-        var shortestPath = aFriendShipGraph.findShortestPathBetween(createVertex("Idris"), createVertex("Lina"));
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Idris", "Lina");
 
         assertEquals(2, shortestPath.distance());
         assertArrayEquals(new String[]{"Idris", "Kamil", "Lina"}, shortestPath.path().toArray());
@@ -131,7 +130,7 @@ class GraphTest {
     void canFindTheShortestPathFromArbitraryVertex() {
         var aFriendShipGraph = GraphFixture.aFriendshipGraphFromExerciseFive();
 
-        var shortestPath = aFriendShipGraph.findShortestPathBetween(createVertex("Ken"), createVertex("Sasha"));
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Ken", "Sasha");
 
         assertEquals(2, shortestPath.distance());
         assertArrayEquals(new String[]{"Ken", "Marco", "Sasha"}, shortestPath.path().toArray());
