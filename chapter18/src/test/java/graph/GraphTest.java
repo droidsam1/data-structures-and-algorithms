@@ -1,11 +1,14 @@
 package graph;
 
+import static fixture.GraphFixture.aFriendshipGraphFromExerciseFive;
+import static fixture.GraphFixture.buildGraphFromExerciseOne;
+import static fixture.GraphFixture.buildGraphFromExerciseThree;
+import static graph.Vertex.createVertex;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import fixture.GraphFixture;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.AfterEach;
@@ -30,7 +33,7 @@ class GraphTest {
     @Test
     void shouldVertexCanBeAddedToAGraph() {
         var aGraph = new Graph<String>();
-        var aVertex = new Vertex<>("A label");
+        var aVertex = createVertex("A label");
 
         aGraph.add(aVertex);
 
@@ -46,7 +49,7 @@ class GraphTest {
     @Test
     void canContainVertex() {
         var aGraph = new Graph<String>();
-        var aVertex = new Vertex<>("A label");
+        var aVertex = createVertex("A label");
         aGraph.add(aVertex);
 
         assertTrue(aGraph.contains("A label"));
@@ -55,8 +58,8 @@ class GraphTest {
     @Test
     void canConnectVertex() {
         var aGraph = new Graph<String>();
-        var aVertex = new Vertex<>("A label");
-        var anotherVertex = new Vertex<>("A different label");
+        var aVertex = createVertex("A label");
+        var anotherVertex = createVertex("A different label");
         aVertex.connectWith(anotherVertex);
 
         aGraph.add(aVertex);
@@ -67,15 +70,7 @@ class GraphTest {
 
     @Test
     void canSearchForDeeperConnections() {
-        var aGraph = new Graph<String>();
-        var drill = new Vertex<>("drill");
-        var hammer = new Vertex<>("hammer");
-        var saw = new Vertex<>("saw");
-        var knife = new Vertex<>("knife");
-        var fork = new Vertex<>("fork");
-        drill.connectWith(hammer.connectWith(saw.connectWith(knife.connectWith(fork))));
-
-        aGraph.add(drill);
+        var aGraph = buildGraphFromExerciseOne();
 
         assertTrue(aGraph.contains("drill"));
         assertTrue(aGraph.contains("saw"));
@@ -84,22 +79,14 @@ class GraphTest {
 
     @Test
     void canSearchForAVertexEvenInCircularGraphs() {
-        var aGraph = new Graph<String>();
-        var drill = new Vertex<>("drill");
-        var hammer = new Vertex<>("hammer");
-        var saw = new Vertex<>("saw");
-        var knife = new Vertex<>("knife");
-        var fork = new Vertex<>("fork");
-        drill.connectWith(hammer.connectWith(saw.connectWith(knife.connectWith(fork.connectWith(drill)))));
-
-        aGraph.add(drill);
+        var aGraph = buildGraphFromExerciseOne();
 
         assertTrue(aGraph.contains("fork"));
     }
 
     @Test
     void breadFirstSearchShouldBehaveAsExample() {
-        var aGraph = GraphFixture.buildGraphFromExerciseThree();
+        var aGraph = buildGraphFromExerciseThree();
 
         aGraph.traverseBfsAndPerform(vertex -> System.out.printf("%s", vertex));
 
@@ -109,7 +96,7 @@ class GraphTest {
 
     @Test
     void canPerformADepthFirstSearch() {
-        var aGraph = GraphFixture.buildGraphFromExerciseThree();
+        var aGraph = buildGraphFromExerciseThree();
 
         aGraph.traverseDfsAndPerform(vertex -> System.out.printf("%s", vertex));
 
@@ -118,7 +105,7 @@ class GraphTest {
 
     @Test
     void canFindTheShortestPath() {
-        var aFriendShipGraph = GraphFixture.aFriendshipGraphFromExerciseFive();
+        var aFriendShipGraph = aFriendshipGraphFromExerciseFive();
 
         var shortestPath = aFriendShipGraph.findShortestPathBetween("Idris", "Lina");
 
@@ -128,7 +115,7 @@ class GraphTest {
 
     @Test
     void canFindTheShortestPathFromArbitraryVertex() {
-        var aFriendShipGraph = GraphFixture.aFriendshipGraphFromExerciseFive();
+        var aFriendShipGraph = aFriendshipGraphFromExerciseFive();
 
         var shortestPath = aFriendShipGraph.findShortestPathBetween("Ken", "Sasha");
 

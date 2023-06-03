@@ -7,6 +7,32 @@ import graph.Vertex;
 
 public class GraphFixture {
 
+    public static Graph<String> buildGraphFromExerciseOne() {
+        var aGraph = new Graph<String>();
+        var drill = createVertex("drill");
+        var hammer = createVertex("hammer");
+        var saw = createVertex("saw");
+        var knife = createVertex("knife");
+        var fork = createVertex("fork");
+        var spoon = createVertex("spoon");
+        drill.connectWith(hammer.connectWith(saw.connectWith(knife.connectWith(fork).connectWith(spoon))));
+
+        var brush = createVertex("brush");
+        var nailPolish = createVertex("nail polish");
+        var eyeShadow = createVertex("eye shadow");
+        var eyeGlasses = createVertex("eye glasses");
+        brush.connectWith(nailPolish.connectWith(eyeShadow.connectWith(eyeGlasses)));
+
+        var nails = createVertex("nails");
+        var pins = createVertex("pins");
+        var needles = createVertex("needles");
+        nails.connectWith(pins.connectWith(needles)).connectWith(needles).connectWith(nailPolish).connectWith(hammer);
+
+        aGraph.add(drill);
+
+        return aGraph;
+    }
+
     public static Graph<String> buildGraphFromExerciseThree() {
         var aGraph = new Graph<String>();
 
