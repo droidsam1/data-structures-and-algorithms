@@ -34,21 +34,23 @@ public class DijkstraShortestPath<T> {
             return null;
         }
         var current = pathMap.get(anotherVertex);
+        var totalDistance = current.distance();
         result.add(anotherVertex.value());
         while (current != null && !current.from().equals(from)) {
             result.add(current.from().value());
+            totalDistance += current.distance();
             current = pathMap.get(current.from);
         }
         result.add(from.value());
         Collections.reverse(result);
-        return new GraphPath<>(result, pathMap.get(anotherVertex).distance);
+        return new GraphPath<>(result, totalDistance);
     }
 
     private void buildPathMap() {
         Set<Vertex<T>> visitedVertex = new HashSet<>();
         Deque<Vertex<T>> neighbourhoodStack = new ArrayDeque<>();
         neighbourhoodStack.add(from);
-        var distanceFromOrigin = 1;
+        var distanceFromOrigin = 0;
         while (!neighbourhoodStack.isEmpty()) {
             var current = neighbourhoodStack.pop();
             if (visitedVertex.contains(current)) {

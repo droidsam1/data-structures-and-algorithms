@@ -1,6 +1,7 @@
 package graph;
 
 import static fixture.GraphFixture.aFriendshipGraphFromExerciseFive;
+import static fixture.GraphFixture.buildFlightMapFromPage376;
 import static fixture.GraphFixture.buildGraphFromExerciseOne;
 import static fixture.GraphFixture.buildGraphFromExerciseThree;
 import static graph.Vertex.createVertex;
@@ -121,6 +122,16 @@ class GraphTest {
 
         assertEquals(2, shortestPath.distance());
         assertArrayEquals(new String[]{"Ken", "Marco", "Sasha"}, shortestPath.path().toArray());
+    }
+
+
+    @Test
+    void canFindTheShortestFromWeightedGraphs() {
+        var aFriendShipGraph = buildFlightMapFromPage376();
+
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Atlanta", "El Paso");
+
+        assertEquals(280, shortestPath.distance());
     }
 
 }

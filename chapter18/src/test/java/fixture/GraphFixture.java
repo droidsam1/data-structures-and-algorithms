@@ -3,7 +3,6 @@ package fixture;
 import static graph.Vertex.createVertex;
 
 import graph.Graph;
-import graph.Vertex;
 
 public class GraphFixture {
 
@@ -102,13 +101,13 @@ public class GraphFixture {
     public static Graph<String> aFriendshipGraphFromExerciseFive() {
         var aGraph = new Graph<String>();
 
-        var idris = Vertex.createVertex("Idris");
-        var kamil = Vertex.createVertex("Kamil");
-        var talia = Vertex.createVertex("Talia");
-        var lina = Vertex.createVertex("Lina");
-        var ken = Vertex.createVertex("Ken");
-        var marco = Vertex.createVertex("Marco");
-        var sasha = Vertex.createVertex("Sasha");
+        var idris = createVertex("Idris");
+        var kamil = createVertex("Kamil");
+        var talia = createVertex("Talia");
+        var lina = createVertex("Lina");
+        var ken = createVertex("Ken");
+        var marco = createVertex("Marco");
+        var sasha = createVertex("Sasha");
 
         idris.connectWith(kamil);
         idris.connectWith(talia);
@@ -132,6 +131,33 @@ public class GraphFixture {
         sasha.connectWith(lina);
 
         aGraph.add(idris);
+
+        return aGraph;
+    }
+
+    public static Graph<String> buildFlightMapFromPage376() {
+        var aGraph = new Graph<String>();
+        var chicago = createVertex("Chicago");
+        var denver = createVertex("Denver");
+        var boston = createVertex("Boston");
+        var elPaso = createVertex("El Paso");
+        var atlanta = createVertex("Atlanta");
+
+        elPaso.connectWith(boston, 100);
+
+        denver.connectWith(elPaso, 140);
+        denver.connectWith(chicago, 40);
+
+        chicago.connectWith(elPaso, 80);
+
+        boston.connectWith(denver, 180);
+        boston.connectWith(chicago, 120);
+
+        atlanta.connectWith(boston, 100);
+        atlanta.connectWith(denver, 160);
+
+        aGraph.add(atlanta);
+
 
         return aGraph;
     }
