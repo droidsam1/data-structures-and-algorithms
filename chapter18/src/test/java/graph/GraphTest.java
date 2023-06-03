@@ -1,6 +1,11 @@
 package graph;
 
+import static fixture.GraphFixture.aFriendshipGraphFromExerciseFive;
+import static fixture.GraphFixture.buildFlightMapFromPage376;
+import static fixture.GraphFixture.buildGraphFromExerciseOne;
+import static fixture.GraphFixture.buildGraphFromExerciseThree;
 import static graph.Vertex.createVertex;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,7 +34,7 @@ class GraphTest {
     @Test
     void shouldVertexCanBeAddedToAGraph() {
         var aGraph = new Graph<String>();
-        var aVertex = new Vertex<>("A label");
+        var aVertex = createVertex("A label");
 
         aGraph.add(aVertex);
 
@@ -45,62 +50,46 @@ class GraphTest {
     @Test
     void canContainVertex() {
         var aGraph = new Graph<String>();
-        var aVertex = new Vertex<>("A label");
+        var aVertex = createVertex("A label");
         aGraph.add(aVertex);
 
-        assertTrue(aGraph.contains(aVertex));
+        assertTrue(aGraph.contains("A label"));
     }
 
     @Test
     void canConnectVertex() {
         var aGraph = new Graph<String>();
-        var aVertex = new Vertex<>("A label");
-        var anotherVertex = new Vertex<>("A different label");
+        var aVertex = createVertex("A label");
+        var anotherVertex = createVertex("A different label");
         aVertex.connectWith(anotherVertex);
 
         aGraph.add(aVertex);
 
-        assertTrue(aGraph.contains(aVertex));
-        assertTrue(aGraph.contains(anotherVertex));
+        assertTrue(aGraph.contains("A label"));
+        assertTrue(aGraph.contains("A different label"));
     }
 
     @Test
     void canSearchForDeeperConnections() {
-        var aGraph = new Graph<String>();
-        var drill = new Vertex<>("drill");
-        var hammer = new Vertex<>("hammer");
-        var saw = new Vertex<>("saw");
-        var knife = new Vertex<>("knife");
-        var fork = new Vertex<>("fork");
-        drill.connectWith(hammer.connectWith(saw.connectWith(knife.connectWith(fork))));
+        var aGraph = buildGraphFromExerciseOne();
 
-        aGraph.add(drill);
-
-        assertTrue(aGraph.contains(drill));
-        assertTrue(aGraph.contains(saw));
-        assertTrue(aGraph.contains(fork));
+        assertTrue(aGraph.contains("drill"));
+        assertTrue(aGraph.contains("saw"));
+        assertTrue(aGraph.contains("fork"));
     }
 
     @Test
     void canSearchForAVertexEvenInCircularGraphs() {
-        var aGraph = new Graph<String>();
-        var drill = new Vertex<>("drill");
-        var hammer = new Vertex<>("hammer");
-        var saw = new Vertex<>("saw");
-        var knife = new Vertex<>("knife");
-        var fork = new Vertex<>("fork");
-        drill.connectWith(hammer.connectWith(saw.connectWith(knife.connectWith(fork.connectWith(drill)))));
+        var aGraph = buildGraphFromExerciseOne();
 
-        aGraph.add(drill);
-
-        assertTrue(aGraph.contains(fork));
+        assertTrue(aGraph.contains("fork"));
     }
 
     @Test
     void breadFirstSearchShouldBehaveAsExample() {
         var aGraph = buildGraphFromExerciseThree();
 
-        aGraph.traverseBfsAndPerform(vertex -> System.out.printf("%s", vertex.value()));
+        aGraph.traverseBfsAndPerform(vertex -> System.out.printf("%s", vertex));
 
         assertEquals("abcdefghijklmnop", outContent.toString());
     }
@@ -110,74 +99,48 @@ class GraphTest {
     void canPerformADepthFirstSearch() {
         var aGraph = buildGraphFromExerciseThree();
 
-        aGraph.traverseDfsAndPerform(vertex -> System.out.printf("%s", vertex.value()));
+        aGraph.traverseDfsAndPerform(vertex -> System.out.printf("%s", vertex));
 
         assertEquals("abejfocgkdhlminp", outContent.toString());
     }
 
-    private Graph<String> buildGraphFromExerciseThree() {
-        var aGraph = new Graph<String>();
+    @Test
+    void canFindTheShortestPath() {
+        var aFriendShipGraph = aFriendshipGraphFromExerciseFive();
 
-        var a = createVertex("a");
-        var b = createVertex("b");
-        var c = createVertex("c");
-        var d = createVertex("d");
-        var e = createVertex("e");
-        var f = createVertex("f");
-        var g = createVertex("g");
-        var h = createVertex("h");
-        var i = createVertex("i");
-        var j = createVertex("j");
-        var k = createVertex("k");
-        var l = createVertex("l");
-        var m = createVertex("m");
-        var n = createVertex("n");
-        var o = createVertex("o");
-        var p = createVertex("p");
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Idris", "Lina");
 
-        o.connectWith(j);
-        j.connectWith(o);
-        j.connectWith(f).connectWith(e);
-        e.connectWith(j);
-        f.connectWith(j);
-        b.connectWith(e);
-        b.connectWith(f);
+        assertEquals(2, shortestPath.distance());
+        assertArrayEquals(new String[]{"Idris", "Kamil", "Lina"}, shortestPath.path().toArray());
+    }
 
-        b.connectWith(a);
-        a.connectWith(b);
+    @Test
+    void canFindTheShortestPathFromArbitraryVertex() {
+        var aFriendShipGraph = aFriendshipGraphFromExerciseFive();
 
-        a.connectWith(c);
-        c.connectWith(a);
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Ken", "Sasha");
 
-        a.connectWith(d);
-        d.connectWith(a);
+        assertEquals(2, shortestPath.distance());
+        assertArrayEquals(new String[]{"Ken", "Marco", "Sasha"}, shortestPath.path().toArray());
+    }
 
-        c.connectWith(a);
-        c.connectWith(g);
 
-        g.connectWith(c);
-        g.connectWith(k);
+    @Test
+    void canFindTheShortestFromWeightedGraphs() {
+        var aFriendShipGraph = buildFlightMapFromPage376();
 
-        k.connectWith(g);
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Atlanta", "El Paso");
 
-        d.connectWith(h);
-        h.connectWith(d);
-        h.connectWith(l);
-        l.connectWith(h);
-        h.connectWith(m);
-        m.connectWith(h);
-        m.connectWith(i);
-        i.connectWith(m);
-        i.connectWith(n);
-        n.connectWith(i);
-        n.connectWith(p);
-        p.connectWith(n);
+        assertEquals(280, shortestPath.distance());
+    }
 
-        d.connectWith(i);
-        i.connectWith(d);
+    @Test
+    void canFindTheShortestFromWeightedGraphsAnotherExample() {
+        var aFriendShipGraph = buildFlightMapFromPage376();
 
-        aGraph.add(a);
-        return aGraph;
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Atlanta", "Chicago");
+
+        assertEquals(200, shortestPath.distance());
     }
 
 }
