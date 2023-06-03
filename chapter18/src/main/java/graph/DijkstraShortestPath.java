@@ -34,33 +34,30 @@ public class DijkstraShortestPath<T> {
             return null;
         }
         var current = pathMap.get(anotherVertex);
-        var totalDistance = current.distance();
         result.add(anotherVertex.value());
         while (current != null && !current.from().equals(from)) {
             result.add(current.from().value());
-            totalDistance += current.distance();
             current = pathMap.get(current.from);
         }
         result.add(from.value());
         Collections.reverse(result);
-        return new GraphPath<>(result, totalDistance);
+        return new GraphPath<>(result, pathMap.get(anotherVertex).distance());
     }
 
     private void buildPathMap() {
         Set<Vertex<T>> visitedVertex = new HashSet<>();
         Deque<Vertex<T>> neighbourhoodStack = new ArrayDeque<>();
         neighbourhoodStack.add(from);
-        var distanceFromOrigin = 0;
         while (!neighbourhoodStack.isEmpty()) {
             var current = neighbourhoodStack.pop();
             if (visitedVertex.contains(current)) {
                 continue;
             }
+            var distanceFromOrigin = pathMap.getOrDefault(current, new PathVertex<>(null, 0)).distance;
             processVertex(current, visitedVertex, distanceFromOrigin);
             if (neighbourhoodStack.isEmpty()) {
                 neighbourhoodStack.addAll(current.adjacents().keySet().stream().filter(not(current::equals)).toList());
             }
-
         }
     }
 
@@ -72,7 +69,7 @@ public class DijkstraShortestPath<T> {
         for (Entry<Vertex<T>, Integer> entry : neighbourhood.entrySet()) {
             var distanceFromOrigin = accumulatedDistance + current.adjacents().getOrDefault(entry.getKey(), 0);
             pathMap.putIfAbsent(entry.getKey(), new PathVertex<>(current, distanceFromOrigin));
-            if (pathMap.get(entry.getKey()).distance > accumulatedDistance) {
+            if (pathMap.get(entry.getKey()).distance > distanceFromOrigin) {
                 pathMap.put(entry.getKey(), new PathVertex<>(current, distanceFromOrigin));
             }
         }

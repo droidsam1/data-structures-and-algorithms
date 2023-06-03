@@ -134,4 +134,13 @@ class GraphTest {
         assertEquals(280, shortestPath.distance());
     }
 
+    @Test
+    void canFindTheShortestFromWeightedGraphsAnotherExample() {
+        var aFriendShipGraph = buildFlightMapFromPage376();
+
+        var shortestPath = aFriendShipGraph.findShortestPathBetween("Atlanta", "Chicago");
+
+        assertEquals(200, shortestPath.distance());
+    }
+
 }
