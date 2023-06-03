@@ -5,6 +5,7 @@ import static java.lang.Boolean.TRUE;
 import static java.util.function.Predicate.not;
 
 import java.util.ArrayDeque;
+import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashSet;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Graph<T> {
+
     private final Vertex<T> noConcreteValue = Vertex.createVertex(null);
     private final Set<Vertex<T>> vertexMap;
 
@@ -29,7 +31,8 @@ public class Graph<T> {
     }
 
     public boolean contains(Vertex<T> searchedVertex) {
-        return breadSearchFirst(searchedVertex, vertexMap.iterator().next(),  v -> {}).isPresent();
+        return breadSearchFirst(searchedVertex, vertexMap.iterator().next(), v -> {
+        }).isPresent();
     }
 
     private void breadSearchFirst(Consumer<Vertex<T>> operatorToPerformOnEveryVertex) {
@@ -63,5 +66,24 @@ public class Graph<T> {
 
     public void traverseBfsAndPerform(Consumer<Vertex<T>> consumer) {
         breadSearchFirst(consumer);
+    }
+
+    public void traverseDfsAndPerform(Consumer<Vertex<T>> vertexConsumer) {
+        this.traverseDfsAndPerform(vertexConsumer, vertexMap.iterator().next(), new HashSet<>());
+    }
+
+    public void traverseDfsAndPerform(Consumer<Vertex<T>> consumer, Vertex<T> vertex, Set<Vertex<T>> alreadyVisited) {
+        if (alreadyVisited.contains(vertex)) {
+            return;
+        }
+        alreadyVisited.add(vertex);
+        consumer.accept(vertex);
+        var pendingToVisit = vertex.adjacentList()
+                                   .stream()
+                                   .sorted(Comparator.comparing(o -> o.value().toString()))
+                                   .toList();
+        for (Vertex<T> adjacent : pendingToVisit) {
+            traverseDfsAndPerform(consumer, adjacent, alreadyVisited);
+        }
     }
 }

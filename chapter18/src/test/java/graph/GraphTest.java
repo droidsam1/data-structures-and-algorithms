@@ -105,6 +105,16 @@ class GraphTest {
         assertEquals("abcdefghijklmnop", outContent.toString());
     }
 
+
+    @Test
+    void canPerformADepthFirstSearch() {
+        var aGraph = buildGraphFromExerciseThree();
+
+        aGraph.traverseDfsAndPerform(vertex -> System.out.printf("%s", vertex.value()));
+
+        assertEquals("abejfocgkdhlminp", outContent.toString());
+    }
+
     private Graph<String> buildGraphFromExerciseThree() {
         var aGraph = new Graph<String>();
 
