@@ -41,14 +41,14 @@ public class Graph<T> {
     }
 
     private Optional<Vertex<T>> breadthSearchFirst(
-            T searchedVertex, Vertex<T> fromVertex, Consumer<Vertex<T>> vertexConsumer
+            T searchedVertex, Vertex<T> fromVertex, Consumer<T> vertexConsumer
     ) {
         Set<Vertex<T>> visitedVertex = new HashSet<>();
         Deque<Vertex<T>> neighbourhoodStack = new ArrayDeque<>();
         neighbourhoodStack.add(fromVertex);
         while (!neighbourhoodStack.isEmpty()) {
             var adjacent = neighbourhoodStack.pop();
-            vertexConsumer.accept(adjacent);
+            vertexConsumer.accept(adjacent.value());
 
             if (adjacent.value().equals(searchedVertex)) {
                 return Optional.of(adjacent);
@@ -65,20 +65,20 @@ public class Graph<T> {
         return Optional.empty();
     }
 
-    public void traverseBfsAndPerform(Consumer<Vertex<T>> consumer) {
+    public void traverseBfsAndPerform(Consumer<T> consumer) {
         this.breadthSearchFirst(null, vertexSet.iterator().next(), consumer);
     }
 
-    public void traverseDfsAndPerform(Consumer<Vertex<T>> vertexConsumer) {
+    public void traverseDfsAndPerform(Consumer<T> vertexConsumer) {
         this.traverseDfsAndPerform(vertexConsumer, vertexSet.iterator().next(), new HashSet<>());
     }
 
-    public void traverseDfsAndPerform(Consumer<Vertex<T>> consumer, Vertex<T> vertex, Set<Vertex<T>> alreadyVisited) {
+    public void traverseDfsAndPerform(Consumer<T> consumer, Vertex<T> vertex, Set<Vertex<T>> alreadyVisited) {
         if (alreadyVisited.contains(vertex)) {
             return;
         }
         alreadyVisited.add(vertex);
-        consumer.accept(vertex);
+        consumer.accept(vertex.value());
         var pendingToVisit = vertex.adjacentList()
                                    .stream()
                                    .sorted(Comparator.comparing(o -> o.value().toString()))

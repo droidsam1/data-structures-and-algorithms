@@ -101,7 +101,7 @@ class GraphTest {
     void breadFirstSearchShouldBehaveAsExample() {
         var aGraph = GraphFixture.buildGraphFromExerciseThree();
 
-        aGraph.traverseBfsAndPerform(vertex -> System.out.printf("%s", vertex.value()));
+        aGraph.traverseBfsAndPerform(vertex -> System.out.printf("%s", vertex));
 
         assertEquals("abcdefghijklmnop", outContent.toString());
     }
@@ -111,7 +111,7 @@ class GraphTest {
     void canPerformADepthFirstSearch() {
         var aGraph = GraphFixture.buildGraphFromExerciseThree();
 
-        aGraph.traverseDfsAndPerform(vertex -> System.out.printf("%s", vertex.value()));
+        aGraph.traverseDfsAndPerform(vertex -> System.out.printf("%s", vertex));
 
         assertEquals("abejfocgkdhlminp", outContent.toString());
     }
